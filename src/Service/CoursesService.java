@@ -5,13 +5,12 @@ import Main.Courses;
 public class CoursesService {
         public static Integer ID=0;
 
-    public CoursesService(String name) {
-        Courses.name = name;
+
+
+
+public static void Counting(){
         Courses.ID++;
-        System.out.println(name);
-
     }
-
 
 
     }
