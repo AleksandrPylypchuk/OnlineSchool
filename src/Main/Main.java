@@ -3,8 +3,6 @@ package Main;
 import Service.CoursesService;
 
 
-
-
 public class Main {
 
     public static void main(String[] args) {
