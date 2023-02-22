@@ -17,7 +17,6 @@ public class Courses {
 
     public Courses(String name) {
         Courses.name = name;
-        System.out.println(name);
         Counting();
         id  = Courses.ID;
 
