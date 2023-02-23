@@ -19,25 +19,31 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        ChooseClass printing = new ChooseClass();
-        printing.printingChoose();
+//        ChooseClass printing = new ChooseClass();
+//        printing.printingChoose();
 
-        int a = scanner.nextInt();
+        //int a = scanner.nextInt();
         ChooseClass chooseClass = new ChooseClass();
-        chooseClass.chooseVar(a);
+        chooseClass.chooseVar(2);
 
 
         //______________________________________________
+
         System.out.println("Do you want create new Course: Y/N");
         String scanning = scanner.next();
         while (scanning.equals("Y") || scanning.equals("y")) {
 
             CreateCourse createCourse = new CreateCourse(scanning);
+
+            if (Courses.ID == 8){
+                System.out.println("Maximum is 8");
+                break;
+            }
             System.out.println("Do you want create new Course: Y/N");
             scanning = scanner.next();
-            if (scanning.equals("N") || scanning.equals("N")) {
-
+            if (scanning.equals("N") || scanning.equals("N") ) {
             }
+
 
 
         }
