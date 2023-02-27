@@ -1,15 +1,18 @@
 package Main;
 
-import Service.CoursesService;
-import Main.ChooseClass;
+import Main.Repository.CourseRepository;
+import Main.Repository.HomeWorkRepository;
+import Main.Repository.LectorRepository;
 
-import java.util.Scanner;
+
+import java.util.Arrays;
 
 
 public class Main {
 
 
     public static void main(String[] args) {
+        /*
         Courses CourseOne = new Courses("Lesson1");
         Courses CourseTwo = new Courses("Lesson2");
         Courses CourseThree = new Courses("Lesson3");
@@ -48,6 +51,25 @@ public class Main {
 
         }
         System.out.println("Good Bye");
+*/
+        //__________TASK NINE____________________
+        LectorRepository lectorsRepository = new LectorRepository();
+        lectorsRepository.addLectors(new Lector("FirstLector"));
+
+        CourseRepository courseRepository = new CourseRepository();
+        HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
+
+        courseRepository.addCourse(new Course("FirstCours"));
+
+        homeWorkRepository.addHomeWork(new HomeWork("First HomeWork"));
+        homeWorkRepository.addHomeWork(new HomeWork("Second HomeWork"));
+        homeWorkRepository.addHomeWork(new HomeWork("Third HomeWork"));
+        System.out.println(Arrays.toString(courseRepository.getCourseArrays()));
+        System.out.println(Arrays.toString(homeWorkRepository.getHomeWorkArrays()));
+        //System.out.println(Arrays.toString(lectorsRepository.getLectorArrays()));
+
+
+
 
     }
 }

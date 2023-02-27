@@ -1,13 +1,16 @@
 package Service;
 
 
-import Main.HomeWork;
+import Main.Repository.HomeWorkRepository;
 
 public class HomeWorkService {
-    public HomeWork homeWork() {
+        public static Integer ID = 0;
 
 
-        return new HomeWork();
-    }
+      /*  public static void CountingHomework() {
+            HomeWorkService HomeWork;
+            HomeWork.ID++;
+        }*/
+
 }
 
