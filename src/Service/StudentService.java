@@ -1,9 +1,7 @@
 package Service;
 
-import Main.Students;
+import Main.Student;
 
 public class StudentService {
-    public Students additionalMaterial() {
-        return new Students();
+
     }
-}

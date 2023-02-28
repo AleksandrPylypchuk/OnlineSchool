@@ -8,7 +8,7 @@ public class Course {
     public static Integer ID = 0;
     private int identifier;
     private Lector lectors;
-    private Students students;
+
     private AdditionalMaterial material;
     private HomeWork homeWork;
 
@@ -27,11 +27,8 @@ public class Course {
             "name='" + name + '\'' +
             '}';
   }
-      /* public Courses(String name) {
-        Courses.name = name;
-        Counting();
-        id = Courses.ID;
-*/
+
+
 
     }
 
