@@ -12,7 +12,7 @@ public class LectorRepository {
             if (lectorArrays[i] == null) {
                 lectorArrays[i] = lectors;
                 break;
-            } else if (i == lectorArrays.length-1) {
+            } else if (i == lectorArrays.length - 1) {
                 increasingArray();
             }
 

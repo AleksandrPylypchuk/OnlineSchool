@@ -3,21 +3,6 @@ package Service;
 public class Service {
     public static Integer ID = 0;
     int CAPASITY = 10;
- /*   private Service[] services = new Service[CAPASITY];
-
-    public void ServicePrint(Service service) {
-        for (int i = 0; i < services.length; i++) {
-            ID = i + 1;
-            System.out.println(services[i] + " ID" + ID);
-
-        }
-
-    }
-
-    public void setServices(Service[] services) {
-        this.services = services;
-    }
-}*/
 
     public static String ServicePrinting(Object[] a) {
         int tmp=0;
@@ -28,7 +13,7 @@ public class Service {
             tmp = i+1;
             System.out.println((String.valueOf(a[i]) + " ID= "+ tmp));
             if (i == iMax)
-               return b.append("End").toString();
+               return b.append("").toString();
 
         }
     }

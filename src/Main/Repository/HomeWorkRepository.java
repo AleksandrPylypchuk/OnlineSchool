@@ -15,7 +15,7 @@ public class HomeWorkRepository {
                 //CountingHomework();
                 homeWorkArrays[i] = homeWork;
                 break;
-            } else if (i == homeWorkArrays.length-1) {
+            } else if (i == homeWorkArrays.length - 1) {
                 increasingArray();
             }
 

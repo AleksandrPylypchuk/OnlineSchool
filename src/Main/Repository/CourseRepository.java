@@ -3,9 +3,6 @@ package Main.Repository;
 import Main.Course;
 
 
-
-
-
 public class CourseRepository {
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];
@@ -17,12 +14,11 @@ public class CourseRepository {
                 courseArrays[i] = course;
 
                 break;
-            } else if (i == courseArrays.length-1)
+            } else if (i == courseArrays.length - 1)
                 increasingArray();
-            }
-
         }
 
+    }
 
 
     private void increasingArray() {
@@ -33,6 +29,7 @@ public class CourseRepository {
         courseArrays = tempCourseArrays;
 
     }
+
     public Course[] getCourseArrays() {
         return courseArrays;
     }
