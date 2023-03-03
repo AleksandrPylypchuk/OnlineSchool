@@ -1,6 +1,6 @@
 package Main.Object;
 
-public class Student {
+public class Student extends SuperObject{
     private String name;
 
     public String getName() {
