@@ -4,10 +4,7 @@ import Main.Object.Course;
 import Main.Object.HomeWork;
 import Main.Object.Lector;
 import Main.Object.Student;
-import Main.Repository.CourseRepository;
-import Main.Repository.HomeWorkRepository;
-import Main.Repository.LectorRepository;
-import Main.Repository.StudentRepository;
+import Main.Repository.*;
 import Service.Service;
 
 
@@ -18,9 +15,6 @@ public class Main {
     String scanning;
 
     public static void main(String[] args) {
-
-
-        //__________TASK NINE____________________
 
 
         LectorRepository lectorsRepository = new LectorRepository();
@@ -36,22 +30,39 @@ public class Main {
         HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
 
         courseRepository.addCourse(new Course("FirstCours"));
+        courseRepository.addCourse(new Course("SecondCours"));
+        courseRepository.addCourse(new Course("ThirdCours"));
+        courseRepository.addCourse(new Course("FourthCours"));
+        courseRepository.addCourse(new Course("FifthCours"));
 
         homeWorkRepository.addHomeWork(new HomeWork("First HomeWork"));
         homeWorkRepository.addHomeWork(new HomeWork("Second HomeWork"));
         homeWorkRepository.addHomeWork(new HomeWork("Third HomeWork"));
 
 
-        int a, b;
+        int a, b, c;
         Scanner scanner = new Scanner(System.in);
+        System.out.println("========================");
+        System.out.println("Printing through SuperClass:");
+        System.out.println(courseRepository.getAll(courseRepository.getCourseArrays()));
+        System.out.println("========================");
+        System.out.println("Enter ID Course=");
+        c = scanner.nextInt();
+        System.out.println("You choose Course=" + courseRepository.getByID(courseRepository.getCourseArrays(), c));
 
+        System.out.println("========================");
+        System.out.println("Delete Course=");
+        c = scanner.nextInt();
+        System.out.println("You choose Course=" + courseRepository.deleteByID(courseRepository.getCourseArrays(), c));
+        System.out.println("========================");
+       // courseRepository.add(new Course("Super"));
 
-        System.out.printf("Choose category: \n");
-        System.out.printf("1: Courses\n");
-        System.out.printf("2: Lectors\n");
-        System.out.printf("3: Students\n");
-        System.out.printf("4: HomeWork\n");
-        System.out.printf("5: Service\n");
+        System.out.println("Choose category:");
+        System.out.println("1: Courses");
+        System.out.println("2: Lectors");
+        System.out.println("3: Students");
+        System.out.println("4: HomeWork");
+        System.out.println("5: Service");
 
         a = scanner.nextInt();
 

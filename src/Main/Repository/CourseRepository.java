@@ -1,14 +1,15 @@
 package Main.Repository;
 
 import Main.Object.Course;
-import Service.Service;
 
 import static Service.CoursesService.Counting;
 
 
-public class CourseRepository {
+public class CourseRepository extends Repositorium {
+
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];
+
 
     public void addCourse(Course course) {
 
@@ -34,7 +35,25 @@ public class CourseRepository {
 
     }
 
+
     public Course[] getCourseArrays() {
         return courseArrays;
     }
+
+    @Override
+    public Object getByID(Object[] a, int ID) {
+        return super.getByID(a, ID);
+    }
+
+    @Override
+    public Object deleteByID(Object[] a, int ID) {
+        return super.deleteByID(a, ID);
+    }
+
+//    @Override
+//    public void add(Object[] a) {
+//        super.add(a);
 }
+
+
+
