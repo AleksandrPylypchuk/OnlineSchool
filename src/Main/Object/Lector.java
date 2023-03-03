@@ -1,16 +1,17 @@
 package Main.Object;
 
-public class Lector {
+public class Lector extends SuperObject{
     private String name;
 
 
     public Lector(String name) {
+        super(name);
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Lectors{" +
+        return "Lector{" +
                 "name='" + name + '\'' +
                 '}';
     }

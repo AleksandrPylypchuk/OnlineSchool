@@ -3,7 +3,7 @@ package Main.Object;
 
 import Main.CreateCourse;
 
-public class Course {
+public class Course extends SuperObject{
   //  public static String name;
     private String name;
     private int id;
@@ -20,6 +20,7 @@ public class Course {
     }
 
   public Course(String name) {
+    super(name);
     this.name = name;
       }
 
