@@ -1,16 +1,16 @@
-package Main;
+package Main.Object;
 
-public class Student {
+public class Lector {
     private String name;
 
 
-    public Student(String name) {
+    public Lector(String name) {
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Lectors{" +
                 "name='" + name + '\'' +
                 '}';
     }

@@ -1,5 +1,9 @@
 package Main;
 
+import Main.Object.Course;
+import Main.Object.HomeWork;
+import Main.Object.Lector;
+import Main.Object.Student;
 import Main.Repository.CourseRepository;
 import Main.Repository.HomeWorkRepository;
 import Main.Repository.LectorRepository;
@@ -7,7 +11,6 @@ import Main.Repository.StudentRepository;
 import Service.Service;
 
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 

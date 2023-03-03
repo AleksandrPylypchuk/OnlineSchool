@@ -1,6 +1,6 @@
 package Main.Repository;
 
-import Main.HomeWork;
+import Main.Object.HomeWork;
 
 
 public class HomeWorkRepository {

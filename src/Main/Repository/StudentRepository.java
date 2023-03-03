@@ -1,7 +1,6 @@
 package Main.Repository;
 
-import Main.HomeWork;
-import Main.Student;
+import Main.Object.Student;
 
 public class StudentRepository {
     private int CAPACITY = 10;

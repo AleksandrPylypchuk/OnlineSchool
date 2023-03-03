@@ -1,11 +1,13 @@
-package Main;
+package Main.Object;
 
+
+import Main.CreateCourse;
 
 public class Course {
   //  public static String name;
-    public String name;
-    public int id;
-    public static Integer ID = 0;
+    private String name;
+    private int id;
+    private static Integer ID = 0;
     private int identifier;
     private Lector lectors;
 
@@ -29,8 +31,19 @@ public class Course {
   }
 
 
+  public static class AdditionalMaterial {
+      private AdditionalMaterial name;
+      private long identifier;
+  }
 
-    }
+  public static void setID(Integer ID) {
+    Course.ID = ID;
+  }
+
+  public static Integer getID() {
+    return ID;
+  }
+}
 
 
 

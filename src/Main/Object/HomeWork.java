@@ -1,7 +1,7 @@
-package Main;
+package Main.Object;
 
 public class HomeWork {
-    public String name;
+    private String name;
     private long identifier;
 
     public HomeWork(String name) {

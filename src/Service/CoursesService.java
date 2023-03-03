@@ -1,16 +1,16 @@
 package Service;
 
-import Main.Course;
+import Main.Object.Course;
 
 public class CoursesService {
     public static Integer ID = 0;
 
 
-    public static void Counting() {
-        Course.ID++;
+    public static int Counting() {
+        Course.setID(Course.getID());
+        return ID++;
     }
 
+    }
 
-
-}
 

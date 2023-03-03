@@ -1,6 +1,9 @@
 package Main.Repository;
 
-import Main.Course;
+import Main.Object.Course;
+import Service.Service;
+
+import static Service.CoursesService.Counting;
 
 
 public class CourseRepository {
@@ -12,7 +15,8 @@ public class CourseRepository {
         for (int i = 0; i < courseArrays.length; i++) {
             if (courseArrays[i] == null) {
                 courseArrays[i] = course;
-
+                int a = Counting();
+                Course.setID(a);
                 break;
             } else if (i == courseArrays.length - 1)
                 increasingArray();

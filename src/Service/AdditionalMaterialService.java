@@ -1,11 +1,11 @@
 package Service;
 
-import Main.AdditionalMaterial;
+import Main.Object.Course;
 
 
 public class AdditionalMaterialService {
-    public AdditionalMaterial additionalMaterial() {
-        return new AdditionalMaterial();
+    public Course.AdditionalMaterial additionalMaterial() {
+        return new Course.AdditionalMaterial();
     }
 
 }
