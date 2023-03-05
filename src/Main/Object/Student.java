@@ -12,6 +12,7 @@ public class Student extends SuperObject{
     }
 
     public Student(String name) {
+        super(name);
         this.name = name;
     }
 

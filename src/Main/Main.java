@@ -1,39 +1,36 @@
 package Main;
 
-import Main.Object.Course;
-import Main.Object.HomeWork;
-import Main.Object.Lector;
-import Main.Object.Student;
+import Main.Object.*;
 import Main.Repository.*;
 import Service.Service;
 
-
+import java.util.Arrays;
 import java.util.Scanner;
+
+import static javax.management.Query.value;
 
 
 public class Main {
-    String scanning;
-
     public static void main(String[] args) {
 
 
-        LectorRepository lectorsRepository = new LectorRepository();
-        lectorsRepository.addLectors(new Lector("FirstLector"));
+        PersonRepository personRepository = new PersonRepository();
+        personRepository.addPerson(new Person(Role.TEACHER, "Miroslav", 1));
+        personRepository.addPerson(new Person(Role.TEACHER, "Mykola", 2));
+        personRepository.addPerson(new Person(Role.STUDENT, "Taras", 1));
+        personRepository.addPerson(new Person(Role.STUDENT, "Andrii", 1));
+        personRepository.addPerson(new Person(Role.STUDENT, "Dasha", 1));
+        personRepository.addPerson(new Person(Role.TEACHER, "Mykola", 2));
 
-        StudentRepository studentRepository = new StudentRepository();
-        studentRepository.addStudent(new Student("FirstStudent"));
-        studentRepository.addStudent(new Student("SecondStudent"));
-        studentRepository.addStudent(new Student("ThirdStudent"));
-        studentRepository.addStudent(new Student("FourthStudent"));
 
         CourseRepository courseRepository = new CourseRepository();
         HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
 
-        courseRepository.addCourse(new Course("FirstCours"));
-        courseRepository.addCourse(new Course("SecondCours"));
-        courseRepository.addCourse(new Course("ThirdCours"));
-        courseRepository.addCourse(new Course("FourthCours"));
-        courseRepository.addCourse(new Course("FifthCours"));
+        courseRepository.addCourse(new Course("FirstCourse"));
+        courseRepository.addCourse(new Course("SecondCourse"));
+        courseRepository.addCourse(new Course("ThirdCourse"));
+        courseRepository.addCourse(new Course("FourthCourse"));
+        courseRepository.addCourse(new Course("FifthCourse"));
 
         homeWorkRepository.addHomeWork(new HomeWork("First HomeWork"));
         homeWorkRepository.addHomeWork(new HomeWork("Second HomeWork"));
@@ -42,20 +39,15 @@ public class Main {
 
         int a, b, c;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("========================");
-        System.out.println("Printing through SuperClass:");
-        System.out.println(courseRepository.getAll(courseRepository.getCourseArrays()));
-        System.out.println("========================");
-        System.out.println("Enter ID Course=");
-        c = scanner.nextInt();
-        System.out.println("You choose Course=" + courseRepository.getByID(courseRepository.getCourseArrays(), c));
 
-        System.out.println("========================");
+
+       /* System.out.println("========================");//Delete Course
         System.out.println("Delete Course=");
         c = scanner.nextInt();
-        System.out.println("You choose Course=" + courseRepository.deleteByID(courseRepository.getCourseArrays(), c));
-        System.out.println("========================");
-       // courseRepository.add(new Course("Super"));
+        System.out.println("You Delete Course=" + courseRepository.deleteByID(courseRepository.getCourseArrays(), c));
+        System.out.println("========================");*/
+
+        //courseRepository.add(new Course("Super"));//Add Course SuperClass
 
         System.out.println("Choose category:");
         System.out.println("1: Courses");
@@ -70,11 +62,17 @@ public class Main {
         while (a < 1 || a > 5) ;
         {
             String addName;
+            int addID;
 
             switch (a) {
 
                 case 1:
                     System.out.printf("Your choose are Courses\n");
+                    System.out.println(courseRepository.getAll(courseRepository.getCourseArrays()));
+                    System.out.println("Enter ID Course=");
+                    c = scanner.nextInt();
+                    System.out.println("You choose Course=" + courseRepository.getByID(courseRepository.getCourseArrays(), c));
+                    System.out.printf(Arrays.toString(personRepository.getPersonArrays()));
                     System.out.println("Do you want create new Course: Y/N");
                     String scanning1 = scanner.next();
                     while (scanning1.equals("Y") || scanning1.equals("y")) {
@@ -95,7 +93,9 @@ public class Main {
                     while (scanning2.equals("Y") || scanning2.equals("y")) {
                         System.out.println("Add name of Lector\n");
                         addName = scanner.next();
-                        lectorsRepository.addLectors(new Lector(addName));
+                        System.out.println("Add ID of Course\n");
+                        addID = Integer.parseInt(scanner.next());
+                        personRepository.addPerson(new Person(Role.TEACHER, addName, addID));
                         System.out.println("Do you want create new Lector: Y/N");
                         scanning2 = scanner.next();
                         if (scanning2.equals("N") || scanning2.equals("N")) {
@@ -109,7 +109,9 @@ public class Main {
                     while (scanning3.equals("Y") || scanning3.equals("y")) {
                         System.out.println("Add name of Student\n");
                         addName = scanner.next();
-                        studentRepository.addStudent(new Student(addName));
+                        System.out.println("Add ID of Course\n");
+                        addID = Integer.parseInt(scanner.next());
+                        personRepository.addPerson(new Person(Role.STUDENT, addName, addID));
                         System.out.println("Do you want create new Lector: Y/N");
                         scanning2 = scanner.next();
                         if (scanning2.equals("N") || scanning2.equals("N")) {
@@ -148,10 +150,10 @@ public class Main {
                             System.out.println(Service.ServicePrinting(courseRepository.getCourseArrays()));
                             break;
                         case 2:
-                            System.out.println(Service.ServicePrinting(lectorsRepository.getLectorArrays()));
+                            System.out.println(Service.ServicePrinting(personRepository.getPersonArrays()));
                             break;
                         case 3:
-                            System.out.println(Service.ServicePrinting(studentRepository.getStudentArrays()));
+                            System.out.println(Service.ServicePrinting(personRepository.getPersonArrays()));
                             break;
                         case 4:
                             System.out.println(Service.ServicePrinting(homeWorkRepository.getHomeWorkArrays()));
@@ -165,9 +167,11 @@ public class Main {
 
         }
 
-
     }
 }
+
+
+
 
 
 
