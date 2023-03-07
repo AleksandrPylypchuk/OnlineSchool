@@ -1,22 +1,25 @@
 package Main.Object;
 
-public class Person extends SuperObject{
+public class Person{
     private Role role;
     private int courseId;
-    private String name;
+    private String firstname, lastname, email, phone;
 
-    public Person(Role role, String name, int courseId) {
-        super(name);
+    public Person(Role role, String firstname, String lastname, String email, String phone, int courseId) {
         this.role = role;
         this.courseId = courseId;
-        this.name=name;
+        this.firstname=firstname;
     }
+
     @Override
     public String toString() {
         return "Person{" +
-                "role=" + role + " Name=" + name +
+                "role=" + role +
+                ", courseId=" + courseId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
-
-
 }
