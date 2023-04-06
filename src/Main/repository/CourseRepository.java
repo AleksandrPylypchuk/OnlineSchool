@@ -1,6 +1,6 @@
-package main.repository;
+package Main.repository;
 
-import main.object.Course;
+import Main.object.Course;
 
 import static service.CoursesService.Counting;
 

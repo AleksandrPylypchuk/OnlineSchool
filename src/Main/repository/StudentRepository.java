@@ -1,6 +1,6 @@
-package main.repository;
+package Main.repository;
 
-import main.object.Student;
+import Main.object.Student;
 
 public class StudentRepository {
     private int CAPACITY = 10;

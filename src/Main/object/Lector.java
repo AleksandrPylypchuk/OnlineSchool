@@ -1,4 +1,4 @@
-package main.object;
+package Main.object;
 
 public class Lector extends SuperObject{
     private String name;

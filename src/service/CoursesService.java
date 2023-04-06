@@ -1,6 +1,6 @@
 package service;
 
-import main.object.Course;
+import Main.object.Course;
 
 public class CoursesService {
     public static Integer ID = 0;

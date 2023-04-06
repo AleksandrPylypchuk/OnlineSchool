@@ -1,7 +1,7 @@
-package main;
+package Main;
 
 import service.Service;
-import main.repository.CourseRepository;
+import Main.repository.CourseRepository;
 
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
-package main.repository;
+package Main.repository;
 
-import main.object.Person;
+import Main.object.Person;
 
 
 public class PersonRepository {

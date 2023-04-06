@@ -1,4 +1,4 @@
-package main.object;
+package Main.object;
 
 public class SuperObject {
     private String name;

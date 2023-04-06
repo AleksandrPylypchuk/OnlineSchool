@@ -1,7 +1,7 @@
-package main;
+package Main;
 
-import main.object.*;
-import main.repository.*;
+import Main.object.*;
+import Main.repository.*;
 import service.Service;
 
 import java.util.Arrays;
@@ -119,7 +119,7 @@ public class Main {
                         personRepository.addPerson(new Person(Role.STUDENT, firstName, lastName, email, phoneNumber, addID));
                         System.out.println("Do you want create new Student: Y/N");
                         scanning2 = scanner.next();
-                        if (scanning2.equals("N") || scanning2.equals("N")) {
+                        if (scanning2.equals("N") || scanning2.equals("n")) {
                         }
                     }
                     break;
@@ -135,7 +135,7 @@ public class Main {
                         homeWorkRepository.addHomeWork(new HomeWork(addName, description));
                         System.out.println("Do you want add Home Task: Y/N");
                         scanning2 = scanner.next();
-                        if (scanning2.equals("N") || scanning2.equals("N")) {
+                        if (scanning2.equals("N") || scanning2.equals("n")) {
                         }
                     }
                     break;

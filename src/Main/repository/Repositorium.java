@@ -1,4 +1,4 @@
-package main.repository;
+package Main.repository;
 
 
 public abstract class Repositorium {

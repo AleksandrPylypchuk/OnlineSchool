@@ -1,7 +1,7 @@
-package main.object;
+package Main.object;
 
 
-import main.CreateCourse;
+import Main.CreateCourse;
 
 public class Course extends SuperObject{
 

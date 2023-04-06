@@ -1,6 +1,6 @@
-package main;
+package Main;
 
-import main.object.Course;
+import Main.object.Course;
 
 import java.util.Scanner;
 
@@ -13,7 +13,6 @@ public class CreateCourse {
         System.out.println("Add name of Course\n");
         Scanner scanner = new Scanner(System.in);
         String nameCourse = scanner.next();
-       // Courses newNameCourse = new Courses(nameCourse);
         this.ID = Course.getID();
         System.out.println("New Course " + nameCourse + ". Total of Courses are  " + ID);
 
