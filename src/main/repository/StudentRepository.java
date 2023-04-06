@@ -1,6 +1,6 @@
-package Main.Repository;
+package main.repository;
 
-import Main.Object.Student;
+import main.object.Student;
 
 public class StudentRepository {
     private int CAPACITY = 10;
@@ -10,7 +10,7 @@ public class StudentRepository {
 
         for (int i = 0; i < studentArrays.length; i++) {
             if (studentArrays[i] == null) {
-                //CountingHomework();
+
                 studentArrays[i] = student;
                 break;
             } else if (i == studentArrays.length - 1) {

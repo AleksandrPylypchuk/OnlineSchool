@@ -1,10 +1,10 @@
-package Main.Object;
+package main.object;
 
 
-import Main.CreateCourse;
+import main.CreateCourse;
 
 public class Course extends SuperObject{
-  //  public static String name;
+
     private String name;
     private int id;
     private static Integer ID = 0;

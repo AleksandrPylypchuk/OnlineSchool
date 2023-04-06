@@ -1,4 +1,4 @@
-package Main.Object;
+package main.object;
 
 public class Student extends SuperObject{
     private String name;

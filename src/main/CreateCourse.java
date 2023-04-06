@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import Main.Object.Course;
+import main.object.Course;
 
 import java.util.Scanner;
 

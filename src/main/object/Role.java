@@ -1,4 +1,4 @@
-package Main.Object;
+package main.object;
 
 public enum Role{
     STUDENT, TEACHER;

@@ -1,17 +1,12 @@
-package Main;
+package main;
 
-import Service.Service;
-import Main.Repository.CourseRepository;
-import Main.Repository.HomeWorkRepository;
-import Main.Repository.LectorRepository;
-import java.security.PublicKey;
+import service.Service;
+import main.repository.CourseRepository;
+
 import java.util.Scanner;
 
 public class ChooseClass {
 
-    // public void printingChoose() {
-
-    // }
 
     public void chooseVar() {
 

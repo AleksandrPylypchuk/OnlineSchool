@@ -1,6 +1,4 @@
-package Main.Object;
-
-import Main.CreateCourse;
+package main.object;
 
 public class SuperObject {
     private String name;

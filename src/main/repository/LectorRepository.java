@@ -1,6 +1,6 @@
-package Main.Repository;
+package main.repository;
 
-import Main.Object.Lector;
+import main.object.Lector;
 
 public class LectorRepository {
     private int CAPACITY = 1;

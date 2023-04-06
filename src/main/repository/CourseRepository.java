@@ -1,8 +1,8 @@
-package Main.Repository;
+package main.repository;
 
-import Main.Object.Course;
+import main.object.Course;
 
-import static Service.CoursesService.Counting;
+import static service.CoursesService.Counting;
 
 
 public class CourseRepository extends Repositorium {
@@ -50,9 +50,7 @@ public class CourseRepository extends Repositorium {
         return super.deleteByID(a, ID);
     }
 
-//    @Override
-//    public void add(Object[] a) {
-//        super.add(a);
+
 }
 
 

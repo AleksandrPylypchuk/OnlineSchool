@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 public class Service {
     public static Integer ID = 0;

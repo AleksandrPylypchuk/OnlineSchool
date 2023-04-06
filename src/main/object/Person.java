@@ -1,4 +1,4 @@
-package Main.Object;
+package main.object;
 
 public class Person{
     private Role role;

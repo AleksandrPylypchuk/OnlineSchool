@@ -1,7 +1,6 @@
-package Main.Repository;
+package main.repository;
 
-import Main.Object.Person;
-import Main.Object.Role;
+import main.object.Person;
 
 
 public class PersonRepository {
@@ -17,7 +16,6 @@ public class PersonRepository {
 
         for (int i = 0; i < personArrays.length; i++) {
             if (personArrays[i] == null) {
-                //CountingHomework();
                 personArrays[i] = person;
                 break;
             } else if (i == personArrays.length - 1) {

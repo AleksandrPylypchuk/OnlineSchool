@@ -1,13 +1,13 @@
-package Main;
+package main;
 
-import Main.Object.*;
-import Main.Repository.*;
-import Service.Service;
+import main.object.*;
+import main.repository.*;
+import service.Service;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static javax.management.Query.value;
+
 
 
 public class Main {
@@ -38,18 +38,6 @@ public class Main {
         int a, b, c;
         Scanner scanner = new Scanner(System.in);
 
-
-       /* System.out.println("========================");//Delete Course
-        System.out.println("Delete Course=");
-        c = scanner.nextInt();
-        System.out.println("You Delete Course=" + courseRepository.deleteByID(courseRepository.getCourseArrays(), c));
-        System.out.println("========================");*/
-
-        //courseRepository.add(new Course("Super"));//Add Course SuperClass
-
-//        if (personRepository.getPersonArrays().equals("Student")) ;
-//        {            System.out.println(Arrays.toString(personRepository.getPersonArrays()));
-//        }
 
         System.out.println();
         System.out.println("Choose category:");

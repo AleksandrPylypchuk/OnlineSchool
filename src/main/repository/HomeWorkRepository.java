@@ -1,6 +1,6 @@
-package Main.Repository;
+package main.repository;
 
-import Main.Object.HomeWork;
+import main.object.HomeWork;
 
 
 public class HomeWorkRepository {
@@ -12,7 +12,6 @@ public class HomeWorkRepository {
 
         for (int i = 0; i < homeWorkArrays.length; i++) {
             if (homeWorkArrays[i] == null) {
-                //CountingHomework();
                 homeWorkArrays[i] = homeWork;
                 break;
             } else if (i == homeWorkArrays.length - 1) {

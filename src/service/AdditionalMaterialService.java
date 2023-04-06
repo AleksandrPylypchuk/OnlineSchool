@@ -1,6 +1,6 @@
-package Service;
+package service;
 
-import Main.Object.Course;
+import main.object.Course;
 
 
 public class AdditionalMaterialService {

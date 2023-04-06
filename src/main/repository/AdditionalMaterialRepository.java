@@ -1,4 +1,4 @@
-package Main.Repository;
+package main.repository;
 
 public class AdditionalMaterialRepository {
 }

@@ -1,4 +1,4 @@
-package Main.Object;
+package main.object;
 
 public class HomeWork {
     private String name;
