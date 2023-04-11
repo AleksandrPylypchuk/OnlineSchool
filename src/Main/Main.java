@@ -7,22 +7,17 @@ import service.Service;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-
-
 public class Main {
     public static void main(String[] args) {
 
-
         PersonRepository personRepository = new PersonRepository();
+        CourseRepository courseRepository = new CourseRepository();
+        HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
+
         personRepository.addPerson(new Person(Role.TEACHER, "Miroslav", "Bykov", "miroslav@gmail.com", "+3809912345678", 1));
         personRepository.addPerson(new Person(Role.TEACHER, "Mykola", "Petrov", "Mykola@gmail.com", "+3809812345678", 2));
         personRepository.addPerson(new Person(Role.STUDENT, "Taras", "Repitor", "Taras@Gmail.com", "+3809712345678", 1));
         personRepository.addPerson(new Person(Role.STUDENT, "Andrii", "Charlz", "Andrii@gmail.com", "+3805012345678", 2));
-
-
-        CourseRepository courseRepository = new CourseRepository();
-        HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
 
         courseRepository.addCourse(new Course("FirstCourse"));
         courseRepository.addCourse(new Course("SecondCourse"));
@@ -45,7 +40,6 @@ public class Main {
             if (input == -1) {
                 break;
             }
-
             System.out.println();
             System.out.println("Choose category:");
             System.out.println("1: Courses");
@@ -56,8 +50,7 @@ public class Main {
 
             a = scanner.nextInt();
 
-
-            while (a < 1 || a > 5);
+            while (a < 1 || a > 5) ;
             {
                 String addName, firstName, lastName, phoneNumber, email, description;
                 int addID;
@@ -167,7 +160,7 @@ public class Main {
                                 System.out.println(Service.ServicePrinting(personRepository.getPersonArrays()));
                                 break;
                             case 4:
-                                System.out.println(Service.ServicePrinting((homeWorkRepository.getHomeWorkArrays())));
+                                System.out.println(Service.ServicePrinting(homeWorkRepository.getHomeWorkArrays()));
                                 break;
                         }
 

@@ -3,7 +3,7 @@ package Main.object;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person{
+public class Person {
     private Role role;
     private int courseId;
     private String firstname, lastname, email, phone;

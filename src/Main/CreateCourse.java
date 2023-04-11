@@ -15,10 +15,7 @@ public class CreateCourse {
         String nameCourse = scanner.next();
         this.ID = Course.getID();
         System.out.println("New Course " + nameCourse + ". Total of Courses are  " + ID);
-
-
     }
-
 
 }
 
