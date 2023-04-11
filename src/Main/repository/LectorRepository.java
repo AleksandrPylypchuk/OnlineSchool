@@ -3,22 +3,14 @@ package Main.repository;
 import Main.object.Lector;
 
 public class LectorRepository {
+    private RepositoryService<Lector> lectorRepositoryService;
+    private void addLectors(Lector lectors){
+        lectorRepositoryService.add(lectors);
+    }
     private int CAPACITY = 1;
     private Lector[] lectorArrays = new Lector[CAPACITY];
 
-    public void addLectors(Lector lectors) {
 
-        for (int i = 0; i < lectorArrays.length; i++) {
-            if (lectorArrays[i] == null) {
-                lectorArrays[i] = lectors;
-                break;
-            } else if (i == lectorArrays.length - 1) {
-                increasingArray();
-            }
-
-        }
-
-    }
 
     private void increasingArray() {
         int tempCapacity = CAPACITY;

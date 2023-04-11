@@ -2,51 +2,74 @@ package Main.repository;
 
 
 public class RepositoryService<E> {
-    private int CAPACITY = 10;
-    private E[] elementArray;
 
-    int size() {
-        return elementArray.length + 1;
-    }
+        private int size;
+        private E[] array;
 
-    boolean isEmpty() {
-        if (elementArray.length == 0) {
-            return true;
+
+        public RepositoryService() {
+            size = 0;
+            array = (E[]) new Object[10];
         }
-        return false;
-    }
 
-    E get(int index) {
-        return elementArray[index];
-    }
+        public int size() {
+            return size;
+        }
 
-    void add(E element) {
-        for (int i = 0; i < elementArray.length; i++) {
-            if (elementArray[i] == null) {
-                elementArray[i] = element;
-                break;
-            } else if (i == elementArray.length - 1) {
-                increasingArray();
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        public E get(int index) {
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
             }
+            return array[index];
+        }
 
+        public void add(E element) {
+            if (size == array.length) {
+                resizeArray(array.length * 2);
+            }
+            array[size] = element;
+            size++;
+        }
+
+        public void add(int index, E element) {
+            if (index < 0 || index > size) {
+                throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
+            }
+            if (size == array.length) {
+                resizeArray(array.length * 2);
+            }
+            for (int i = size - 1; i >= index; i--) {
+                array[i + 1] = array[i];
+            }
+            array[index] = element;
+            size++;
+        }
+
+        public void remove(int index) {
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + size);
+            }
+            for (int i = index; i < size - 1; i++) {
+                array[i] = array[i + 1];
+            }
+            array[size - 1] = null;
+            size--;
+            if (size > 0 && size == array.length / 4) {
+                resizeArray(array.length / 2);
+            }
+        }
+
+        private void resizeArray(int newSize) {
+            E[] newArray = (E[]) new Object[newSize];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
+            }
+            array = newArray;
         }
     }
 
 
-    void add(int index, E element) {
-        elementArray[index] = element;
-    }
-
-    void remove(int index) {
-        elementArray[index] = null;
-
-    }
-
-    private void increasingArray() {
-        int tempCapacity = CAPACITY;
-        CAPACITY = (CAPACITY * 3) / 2 + 1;
-        E[] tempArrayElement = (E[]) elementArray[CAPACITY];
-        System.arraycopy(elementArray, 0, tempArrayElement, 0, tempCapacity);
-        elementArray = tempArrayElement;
-    }
-}

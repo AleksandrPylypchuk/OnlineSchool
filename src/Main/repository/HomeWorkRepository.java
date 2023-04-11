@@ -2,41 +2,22 @@ package Main.repository;
 
 import Main.object.HomeWork;
 
-
 public class HomeWorkRepository {
+    private RepositoryService<HomeWork> repository;
 
-    private int CAPACITY = 2;
-    private HomeWork[] homeWorkArrays = new HomeWork[CAPACITY];
+    public HomeWorkRepository() {
+        repository = new RepositoryService<>();
+    }
 
     public void addHomeWork(HomeWork homeWork) {
-
-        for (int i = 0; i < homeWorkArrays.length; i++) {
-            if (homeWorkArrays[i] == null) {
-                homeWorkArrays[i] = homeWork;
-                break;
-            } else if (i == homeWorkArrays.length - 1) {
-                increasingArray();
-            }
-
-        }
-
+        repository.add(homeWork);
     }
-
-
-    private void increasingArray() {
-        int tempCapacity = CAPACITY;
-        CAPACITY = (CAPACITY * 3) / 2 + 1;
-        HomeWork[] temphomeWorkArrays = new HomeWork[CAPACITY];
-        System.arraycopy(homeWorkArrays, 0, temphomeWorkArrays, 0, tempCapacity);
-        homeWorkArrays = temphomeWorkArrays;
-
-    }
-
 
     public HomeWork[] getHomeWorkArrays() {
-        return homeWorkArrays;
+        HomeWork[] homeWorks = new HomeWork[repository.size()];
+        for (int i = 0; i < repository.size(); i++) {
+            homeWorks[i] = repository.get(i);
+        }
+        return homeWorks;
     }
-
-
 }
-
