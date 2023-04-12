@@ -2,13 +2,15 @@ package Main.object;
 
 public class HomeWork {
     private String name;
-    private String description;
-    private long identifier;
+    private String task;
+    private long id;
+    private long lectureID;
 
 
-    public HomeWork(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public HomeWork(long id, long lectureID, String task) {
+        this.task = task;
+        this.id = id;
+        this.lectureID = lectureID;
     }
 
     public String getName() {
@@ -19,12 +21,30 @@ public class HomeWork {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTask() {
+        return task;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTask(String task) {
+        this.task = task;
     }
 
+    public long getLectureID() {
+        return lectureID;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setLectureid(long lectureID) {
+        this.lectureID = lectureID;
+    }
+    public String toString() {
+        return "HomeWork{" +
+                "id=" + id +
+                ", lectureID=" + lectureID +
+                ", task='" + task + '\'' +
+                '}';
+    }
 }

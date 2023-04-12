@@ -3,7 +3,7 @@ package Main.repository;
 import Main.object.Person;
 import Main.object.Role;
 
-public class PersonRepository {
+public class PersonRepository implements PersonInterface{
 
     private RepositoryService<Person> personRepositoryService;
 
@@ -17,7 +17,12 @@ public class PersonRepository {
     }
 
     public Person[] getPersonArrays() {
-        return personArrays;
+        Object[] objects = personRepositoryService.getArray();
+        Person[] persons = new Person[objects.length];
+        for (int i = 0; i < objects.length; i++) {
+            persons[i] = (Person) objects[i];
+        }
+        return persons;
     }
 
     public void addPerson(Person person) {

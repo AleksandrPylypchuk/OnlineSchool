@@ -6,8 +6,15 @@ public class RepositoryService<E> {
         private int size;
         private E[] array;
 
+    public E[] getArray() {
+        return array;
+    }
 
-        public RepositoryService() {
+    public void setArray(E[] array) {
+        this.array = array;
+    }
+
+    public RepositoryService() {
             size = 0;
             array = (E[]) new Object[10];
         }

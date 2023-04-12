@@ -3,9 +3,9 @@ package Main.object;
 
 import Main.CreateCourse;
 
-public class Course extends SuperObject {
+public class Course{
     private String name;
-    private int id;
+    private int lectureID;
     private static Integer ID = 0;
     private int identifier;
     private Lector lectors;
@@ -16,10 +16,17 @@ public class Course extends SuperObject {
         return new CreateCourse(name);
     }
 
-    public Course(String name) {
-        super(name);
+    public Course(int lectureID, String name) {
         this.name = name;
+        this.lectureID=lectureID;
     }
+    public Course(int lectureID, String name, HomeWork homeWork) {
+        this.name = name;
+        this.homeWork = homeWork;
+        this.lectureID=lectureID;
+    }
+
+
 
     @Override
     public String toString() {
@@ -40,6 +47,17 @@ public class Course extends SuperObject {
 
     public static Integer getID() {
         return ID;
+    }
+
+    public void setHomeWorkID(int id){
+        homeWork.setId(id);
+    }
+
+    public void setHomeWorkLectureID(int lectureID) {
+        homeWork.setLectureid(lectureID);
+    }
+    public void setHomeWorkTask(String task) {
+        homeWork.setTask(task);
     }
 }
 

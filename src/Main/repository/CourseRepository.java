@@ -5,7 +5,7 @@ import Main.object.Course;
 import static service.CoursesService.Counting;
 
 
-public class CourseRepository extends Repositorium {
+public class CourseRepository implements CourseRepositoryInterface{
 
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];
@@ -34,22 +34,31 @@ public class CourseRepository extends Repositorium {
         courseArrays = tempCourseArrays;
 
     }
-
+    public Object getByID(Object[] a, int ID) {
+        ID--;
+        return a[ID];
+    }
 
     public Course[] getCourseArrays() {
         return courseArrays;
     }
 
-    @Override
-    public Object getByID(Object[] a, int ID) {
-        return super.getByID(a, ID);
+    public Object getByID(int ID) {
+        ID--;
+        return courseArrays[ID];
     }
 
-    @Override
-    public Object deleteByID(Object[] a, int ID) {
-        return super.deleteByID(a, ID);
+    public Object deleteByID(int ID) {
+        ID--;
+        return courseArrays[ID] = null;
     }
-
+    public String getAll(Object[] a) {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
+        return b.append("").toString();
+    }
 
 }
 

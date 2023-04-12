@@ -4,8 +4,10 @@ import Main.object.*;
 import Main.repository.*;
 import service.Service;
 
-import java.util.Arrays;
 import java.util.Scanner;
+
+import Main.object.Person;
+import Main.object.Role;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,16 +20,14 @@ public class Main {
         personRepository.addPerson(new Person(Role.TEACHER, "Mykola", "Petrov", "Mykola@gmail.com", "+3809812345678", 2));
         personRepository.addPerson(new Person(Role.STUDENT, "Taras", "Repitor", "Taras@Gmail.com", "+3809712345678", 1));
         personRepository.addPerson(new Person(Role.STUDENT, "Andrii", "Charlz", "Andrii@gmail.com", "+3805012345678", 2));
+        HomeWork homeTask1 = new HomeWork(1, 1,"Second homework for Course 1");
+        homeWorkRepository.add(homeTask1);
+        courseRepository.addCourse(new Course(1,"FirstCourse"));
+        homeWorkRepository.add(new HomeWork(2, 1,"Second homework for Course 1"));
+        homeWorkRepository.add(new HomeWork(3, 1,"Third homework for Course 1"));
+        homeWorkRepository.add(new HomeWork(4, 1,"Fourth homework for Course 1"));
+        courseRepository.addCourse(new Course(2,"SecondCourse", new HomeWork(5,1,"First homework with Course #2")));
 
-        courseRepository.addCourse(new Course("FirstCourse"));
-        courseRepository.addCourse(new Course("SecondCourse"));
-        courseRepository.addCourse(new Course("ThirdCourse"));
-        courseRepository.addCourse(new Course("FourthCourse"));
-        courseRepository.addCourse(new Course("FifthCourse"));
-
-        homeWorkRepository.addHomeWork(new HomeWork("First HomeWork", "Working with first homework"));
-        homeWorkRepository.addHomeWork(new HomeWork("Second HomeWork", "Working with second homework"));
-        homeWorkRepository.addHomeWork(new HomeWork("Third HomeWork", "Working with third homework"));
 
         int a, b, c;
         Scanner scanner = new Scanner(System.in);
@@ -52,8 +52,10 @@ public class Main {
 
             while (a < 1 || a > 5) ;
             {
-                String addName, firstName, lastName, phoneNumber, email, description;
-                int addID;
+                Person[] persons = personRepository.getPersonArrays();
+                HomeWork[] homeWorks = homeWorkRepository.get();
+                String addName, firstName, lastName, phoneNumber, email, description, addHomeWork;
+                int addID, addlectureID;
 
                 switch (a) {
 
@@ -63,12 +65,19 @@ public class Main {
                         System.out.println("Enter ID Course=");
                         c = scanner.nextInt();
                         System.out.println("You choose Course=" + courseRepository.getByID(courseRepository.getCourseArrays(), c));
+                        for (HomeWork homeWorkChecked : homeWorks) {
+                            if (homeWorkChecked.getLectureID() == c) {
+                                System.out.println(homeWorkChecked);
+                            }
+                        }
                         System.out.println("Do you want create new Course: Y/N");
                         String scanning1 = scanner.next();
                         while (scanning1.equals("Y") || scanning1.equals("y")) {
+                            System.out.println("Add id of Course\n");
+                            addID = Integer.parseInt(scanner.next());
                             System.out.println("Add name of Course\n");
                             addName = scanner.next();
-                            courseRepository.addCourse(new Course(addName));
+                            courseRepository.addCourse(new Course(addID, addName));
                             System.out.println("Do you want create new Course: Y/N");
                             scanning1 = scanner.next();
                             if (scanning1.equals("N") || scanning1.equals("n")) {
@@ -78,6 +87,13 @@ public class Main {
                         break;
                     case 2:
                         System.out.printf("Your choose are Lectors\n");
+                        for (int i = 0; i < persons.length; i++) {
+                            if (persons[i] != null) {
+                                if (persons[i].getRole() == Role.TEACHER) {
+                                    System.out.println(persons[i]);
+                                }
+                            }
+                        }
                         System.out.println("Do you want create new Lector: Y/N");
                         String scanning2 = scanner.next();
                         while (scanning2.equals("Y") || scanning2.equals("y")) {
@@ -121,18 +137,22 @@ public class Main {
                         }
                         break;
                     case 4:
-                        System.out.printf("Your choose are Home Task\n");
+                        System.out.println("Your choose are Home Task\n");
                         System.out.println("Do you want create new Home Task: Y/N");
                         String scanning4 = scanner.next();
                         while (scanning4.equals("Y") || scanning4.equals("y")) {
-                            System.out.println("Add Name Home Task\n");
-                            addName = scanner.next();
-                            System.out.println("Add description Home Task\n");
+                            System.out.println(courseRepository.getAll(courseRepository.getCourseArrays()));
+                            System.out.println("Enter ID Course=");
+                            addlectureID = Integer.parseInt(scanner.next());
+                            System.out.println("Set number of Task\n");
+                            addID = Integer.parseInt(scanner.next());
+                            System.out.println("Add Task Home Task\n");
                             description = scanner.next();
-                            homeWorkRepository.addHomeWork(new HomeWork(addName, description));
+                            homeWorkRepository.add(new HomeWork(addID, addlectureID, description));
                             System.out.println("Do you want add Home Task: Y/N");
                             scanning2 = scanner.next();
                             if (scanning2.equals("N") || scanning2.equals("n")) {
+                                break;
                             }
                         }
                         break;
@@ -154,13 +174,25 @@ public class Main {
                                 System.out.println(Service.ServicePrinting(courseRepository.getCourseArrays()));
                                 break;
                             case 2:
-                                System.out.println(Service.ServicePrinting(personRepository.getPersonArrays()));
+                                for (int i = 0; i < persons.length; i++) {
+                                    if (persons[i] != null) {
+                                        if (persons[i].getRole() == Role.TEACHER) {
+                                            System.out.println(persons[i]);
+                                        }
+                                    }
+                                }
                                 break;
                             case 3:
-                                System.out.println(Service.ServicePrinting(personRepository.getPersonArrays()));
+                                for (int i = 0; i < persons.length; i++) {
+                                    if (persons[i] != null) {
+                                        if (persons[i].getRole() == Role.STUDENT) {
+                                            System.out.println(persons[i]);
+                                        }
+                                    }
+                                }
                                 break;
                             case 4:
-                                System.out.println(Service.ServicePrinting(homeWorkRepository.getHomeWorkArrays()));
+                                System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
                                 break;
                         }
 
