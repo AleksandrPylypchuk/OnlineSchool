@@ -3,14 +3,15 @@ package Main.object;
 
 import Main.CreateCourse;
 
-public class Course{
+public class Course {
     private String name;
     private int lectureID;
-    private static Integer ID = 0;
+    private static Integer ID = 1;
     private int identifier;
     private Lector lectors;
     private AdditionalMaterial material;
     private HomeWork homeWork;
+    private static int idCounter = 1;
 
     public CreateCourse createCourse(String name) {
         return new CreateCourse(name);
@@ -18,19 +19,24 @@ public class Course{
 
     public Course(int lectureID, String name) {
         this.name = name;
-        this.lectureID=lectureID;
+        this.lectureID = idCounter++;;
+
     }
-    public Course(int lectureID, String name, HomeWork homeWork) {
+
+    public Course(String name, HomeWork homeWork) {
         this.name = name;
         this.homeWork = homeWork;
-        this.lectureID=lectureID;
+        this.lectureID = idCounter++;
+
     }
 
-
+    public int getLectureID() {
+        return lectureID;
+    }
 
     @Override
     public String toString() {
-        return "Courses{" +
+        return "Courses ID=" + lectureID + "{" +
                 "name='" + name + '\'' +
                 '}';
     }
@@ -49,29 +55,16 @@ public class Course{
         return ID;
     }
 
-    public void setHomeWorkID(int id){
+    public void setHomeWorkID(int id) {
         homeWork.setId(id);
     }
 
     public void setHomeWorkLectureID(int lectureID) {
         homeWork.setLectureid(lectureID);
     }
+
     public void setHomeWorkTask(String task) {
         homeWork.setTask(task);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

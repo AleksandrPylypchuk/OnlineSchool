@@ -3,9 +3,10 @@ package Main.repository;
 import Main.object.Course;
 
 import static service.CoursesService.Counting;
+import static service.CoursesService.ID;
 
 
-public class CourseRepository implements CourseRepositoryInterface{
+public class CourseRepository implements CourseRepositoryInterface {
 
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];
@@ -13,16 +14,22 @@ public class CourseRepository implements CourseRepositoryInterface{
 
     public void addCourse(Course course) {
 
+
         for (int i = 0; i < courseArrays.length; i++) {
-            if (courseArrays[i] == null) {
+            Course existingCourse = courseArrays[i];
+            if (existingCourse != null && existingCourse.getLectureID() == course.getLectureID()) {
+              return;
+            }
+            if (existingCourse == null) {
                 courseArrays[i] = course;
                 int a = Counting();
                 Course.setID(a);
                 break;
-            } else if (i == courseArrays.length - 1)
+            } else if (i == courseArrays.length - 1) {
                 increasingArray();
+                addCourse(course);
+            }
         }
-
     }
 
 
@@ -34,14 +41,17 @@ public class CourseRepository implements CourseRepositoryInterface{
         courseArrays = tempCourseArrays;
 
     }
+
     public Object getByID(Object[] a, int ID) {
         ID--;
+
         return a[ID];
     }
 
     public Course[] getCourseArrays() {
         return courseArrays;
     }
+
 
     public Object getByID(int ID) {
         ID--;
@@ -52,9 +62,11 @@ public class CourseRepository implements CourseRepositoryInterface{
         ID--;
         return courseArrays[ID] = null;
     }
+
     public String getAll(Object[] a) {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < a.length; i++) {
+
             System.out.println(a[i]);
         }
         return b.append("").toString();

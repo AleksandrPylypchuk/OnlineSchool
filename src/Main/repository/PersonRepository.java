@@ -1,9 +1,12 @@
 package Main.repository;
 
+import Main.exception.EntityNotFoundException;
 import Main.object.Person;
-import Main.object.Role;
 
-public class PersonRepository implements PersonInterface{
+
+import java.util.Arrays;
+
+public class PersonRepository implements PersonInterface {
 
     private RepositoryService<Person> personRepositoryService;
 
@@ -19,10 +22,13 @@ public class PersonRepository implements PersonInterface{
     public Person[] getPersonArrays() {
         Object[] objects = personRepositoryService.getArray();
         Person[] persons = new Person[objects.length];
-        for (int i = 0; i < objects.length; i++) {
-            persons[i] = (Person) objects[i];
+        int i = 0;
+        for (Object obj : objects) {
+            if (obj instanceof Person) {
+                persons[i++] = (Person) obj;
+            }
         }
-        return persons;
+        return Arrays.copyOf(persons, i);
     }
 
     public void addPerson(Person person) {
@@ -41,5 +47,12 @@ public class PersonRepository implements PersonInterface{
         this.persons = persons;
     }
 
-
+    public Person getPersonById(int id) throws EntityNotFoundException {
+        for (Person person : getPersonArrays()) {
+            if (person != null && person.getId() == id) {
+                return person;
+            }
+        }
+        throw new EntityNotFoundException("Person with ID " + id + " not found");
+    }
 }

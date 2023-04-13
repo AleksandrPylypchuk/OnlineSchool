@@ -5,8 +5,9 @@ import java.util.List;
 
 public class Person {
     private Role role;
-    private int courseId;
+    private int courseId, id;
     private String firstname, lastname, email, phone;
+    private static int idCounter = 0;
 
 
     public Person(Role role, String firstname, String lastname, String email, String phone, int courseId) {
@@ -16,12 +17,14 @@ public class Person {
         this.lastname = lastname;
         this.email = email;
         this.phone = phone;
+        this.id = ++idCounter;
+
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "role=" + role +
+        return "Person{ ID=" + id +
+                " role=" + role +
                 ", courseId=" + courseId +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
@@ -34,12 +37,20 @@ public class Person {
         return role;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setRole(Role role) {
         this.role = role;
     }
 
     public int getCourseId() {
         return courseId;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setCourseId(int courseId) {

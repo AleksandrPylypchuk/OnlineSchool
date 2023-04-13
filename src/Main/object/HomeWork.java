@@ -5,12 +5,13 @@ public class HomeWork {
     private String task;
     private long id;
     private long lectureID;
+    private static int idCounter = 0;
 
 
-    public HomeWork(long id, long lectureID, String task) {
+    public HomeWork(long lectureID, String task) {
         this.task = task;
-        this.id = id;
         this.lectureID = lectureID;
+        this.id = ++idCounter;
     }
 
     public String getName() {
@@ -37,14 +38,18 @@ public class HomeWork {
         this.id = id;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public void setLectureid(long lectureID) {
         this.lectureID = lectureID;
     }
+
     public String toString() {
-        return "HomeWork{" +
+        return "HomeWork " +
                 "id=" + id +
                 ", lectureID=" + lectureID +
-                ", task='" + task + '\'' +
-                '}';
+                ", task='" + task;
     }
 }
