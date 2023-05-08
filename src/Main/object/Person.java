@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person {
+public class Person implements Comparable<Person>{
     private Role role;
     private Integer courseId, id;
     private String firstname, lastname, email, phone;
@@ -34,6 +34,9 @@ public class Person {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+    public int compareTo(Person otherPerson) {
+        return this.lastname.compareTo(otherPerson.getLastname());
     }
 
     public Role getRole() {

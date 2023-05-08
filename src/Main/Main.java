@@ -5,22 +5,21 @@ import Main.object.*;
 import Main.repository.*;
 import service.Service;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 import Main.object.Person;
 import Main.Enum.Role;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 
 public class Main {
     public static void main(String[] args) {
         AdditionalMaterialRepository additionalMaterialRepository = new AdditionalMaterialRepository();
-        AdditionalMaterial additionalMaterial = new AdditionalMaterial(1, "Material#1", 1, ResurceType.BOOK);
-        additionalMaterialRepository.add(additionalMaterial);
+        additionalMaterialRepository.add(new AdditionalMaterial(1, "First Material#1", 1, ResurceType.BOOK));
+        additionalMaterialRepository.add(new AdditionalMaterial(2, "Second Material", 2, ResurceType.URL));
+        additionalMaterialRepository.add(new AdditionalMaterial(3, "Third Material", 1, ResurceType.VIDEO));
+
 
         PersonRepository personRepository = new PersonRepository();
         CourseRepository courseRepository = new CourseRepository();
@@ -36,8 +35,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int a = 0;
 
-        List<Person> personList = personRepository.getPersonList();
 
+        List<Person> persons = personRepository.getPersonList();
 
         while (a != -1) {
             System.out.println("__________________________________");
@@ -100,8 +99,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.printf("Your choose are Lectors\n");
-                    List<Person> lecturers = personRepository.getPersonList();
-                    for (Person lecturer : lecturers) {
+                    for (Person lecturer : persons) {
                         if (lecturer.getRole() == Role.TEACHER) {
                             System.out.println(lecturer);
                         }
@@ -110,11 +108,10 @@ public class Main {
 
                 case 3:
                     System.out.println("Your choose are Students");
-                    List<Person> students = personRepository.getPersonList().stream()
-                            .filter(p -> p.getRole() == Role.STUDENT)
-                            .collect(Collectors.toList());
-                    for (Person student : students) {
-                        System.out.println(student);
+                    for (Person student : persons) {
+                        if (student.getRole() == Role.STUDENT) {
+                            System.out.println(student);
+                        }
                     }
                     break;
 
@@ -212,15 +209,57 @@ public class Main {
                             }
                             break;
                         case 2:
-                            for (Person person : personList) {
-                                System.out.println(person);
+                            Collections.sort(persons);
+                            System.out.println(("TEACHER:"));
+                            for (Person lecturer : persons) {
+                                if (lecturer.getRole() == Role.TEACHER) {
+                                    System.out.println(lecturer);
+                                }
+                            }
+                            System.out.println("_______________");
+                            System.out.println("Stedents");
+                            for (Person student : persons) {
+                                if (student.getRole() == Role.STUDENT) {
+                                    System.out.println(student);
+                                }
                             }
                             break;
                         case 3:
                             System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
                             break;
                         case 4:
-                            System.out.println(additionalMaterialRepository.getAllAdditionalMaterials().toString());
+                            System.out.println("Additional Materials:");
+                            List<AdditionalMaterial> additionalMaterials = additionalMaterialRepository.getAllAdditionalMaterials();
+                            Collections.sort(additionalMaterials, Comparator.comparingInt(AdditionalMaterial::getId));
+                            for (AdditionalMaterial additionalMaterial : additionalMaterials) {
+                                System.out.println(additionalMaterial.toString());
+                            }
+                            System.out.println("______________");
+                            System.out.println("Sort by:");
+                            System.out.println("1: ID");
+                            System.out.println("2: Resource Type");
+                            System.out.println("3: Lecture Number");
+                            int choice = scanner.nextInt();
+
+                            switch (choice) {
+                                case 1:
+                                    additionalMaterials = additionalMaterialRepository.sortById();
+                                    break;
+                                case 2:
+                                    additionalMaterials = additionalMaterialRepository.sortByType();
+                                    break;
+                                case 3:
+                                    additionalMaterials = additionalMaterialRepository.sortByLectureID();
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice.");
+                                    break;
+                            }
+                            if (additionalMaterials != null) {
+                                for (AdditionalMaterial additionalMaterial : additionalMaterials) {
+                                    System.out.println(additionalMaterial.toString());
+                                }
+                            }
                             break;
                     }
 

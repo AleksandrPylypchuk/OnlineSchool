@@ -50,6 +50,9 @@ public class CourseRepository implements CourseRepositoryInterface {
 
         return a[ID];
     }
+    public static CourseRepository getInstance() {
+        return new CourseRepository();
+    }
 
     public Course[] getCourseArrays() {
         return courseArrays;
@@ -81,9 +84,3 @@ public class CourseRepository implements CourseRepositoryInterface {
     }
 
 }
-
-
-
-
-
-

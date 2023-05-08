@@ -2,6 +2,8 @@ package Main.repository;
 
 import Main.object.AdditionalMaterial;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AdditionalMaterialRepository {
@@ -44,4 +46,25 @@ public class AdditionalMaterialRepository {
     public List<AdditionalMaterial> getAllAdditionalMaterials() {
         return additionalMaterials;
     }
+
+    public List<AdditionalMaterial> sortById() {
+        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials);
+        Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getId));
+        return sortedList;
+    }
+
+
+    public List<AdditionalMaterial> sortByLectureID() {
+        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials);
+        Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getLectureId));
+        return sortedList;
+    }
+
+
+    public List<AdditionalMaterial> sortByType() {
+        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials);
+        Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getResourceType));
+        return sortedList;
+    }
+
 }
