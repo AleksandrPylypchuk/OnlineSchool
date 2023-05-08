@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Person {
     private Role role;
-    private int courseId, id;
+    private Integer courseId, id;
     private String firstname, lastname, email, phone;
     private static int idCounter = 0;
 
 
-    public Person(Role role, String firstname, String lastname, String email, String phone, int courseId) {
+    public Person(Role role, String firstname, String lastname, String email, String phone, Integer courseId) {
         this.role = role;
         this.courseId = courseId;
         this.firstname = firstname;
@@ -37,7 +37,7 @@ public class Person {
         return role;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,7 +49,7 @@ public class Person {
         return courseId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -1,5 +1,6 @@
 package Main;
 
+import Main.interator.SimpleIterator;
 import Main.object.*;
 import Main.repository.*;
 import service.Service;
@@ -9,6 +10,8 @@ import java.util.Scanner;
 
 import Main.object.Person;
 import Main.object.Role;
+
+import javax.crypto.spec.PSource;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,6 +38,7 @@ public class Main {
 
 
         while (a != -1) {
+            System.out.println("__________________________________");
             System.out.print("Enter a number (-1 to exit): ");
             System.out.println();
             System.out.println("Choose category:");
@@ -229,11 +233,10 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.printf("Choose category of Service: \n");
-                    System.out.printf("1: Courses\n");
-                    System.out.printf("2: Lectors\n");
-                    System.out.printf("3: Students\n");
-                    System.out.printf("4: Home Work\n");
+                    System.out.println("Choose category of Service: ");
+                    System.out.println("1: Courses");
+                    System.out.println("2: Persons");
+                    System.out.println("3: Home Work");
 
 
                     a = scanner.nextInt();
@@ -264,34 +267,13 @@ public class Main {
                             }
                             break;
                         case 2:
-                            for (int i = 0; i < persons.length; i++) {
-
-                                if (persons[i] != null) {
-                                    if (persons[i].getRole() == Role.TEACHER) {
-                                        System.out.println(persons[i]);
-                                    }
-                                }
-                            }
-                            System.out.println("Enter ID:");
-                            int personId = scanner.nextInt();
-                            System.out.println("Yous choose: " + personRepository.getPersonById(personId));
-
-
-
+                            System.out.println("Your choose Persons");
+                            SimpleIterator<Person> iterator = personRepository.getAll();
+                            while(iterator.hasNext()) {
+                                System.out.println(iterator.next());}
                             break;
+
                         case 3:
-                            for (int i = 0; i < persons.length; i++) {
-                                if (persons[i] != null) {
-                                    if (persons[i].getRole() == Role.STUDENT) {
-                                        System.out.println(persons[i]);
-                                    }
-                                }
-                            }
-                            System.out.println("Enter ID:");
-                            personId = scanner.nextInt();
-                            System.out.println("Yous choose: " + persons[--personId]);
-                            break;
-                        case 4:
                             System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
                             break;
                     }

@@ -5,7 +5,7 @@ import Main.CreateCourse;
 
 public class Course {
     private String name;
-    private int lectureID;
+    private Integer lectureID;
     private static Integer ID = 1;
     private int identifier;
     private Lector lectors;
@@ -15,6 +15,10 @@ public class Course {
 
     public CreateCourse createCourse(String name) {
         return new CreateCourse(name);
+    }
+
+    public void setLectureID(Integer lectureID) {
+        this.lectureID = lectureID;
     }
 
     public Course(int lectureID, String name) {
@@ -41,6 +45,21 @@ public class Course {
                 '}';
     }
 
+    public int getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
+
+    public static int getIdCounter() {
+        return idCounter;
+    }
+
+    public static void setIdCounter(int idCounter) {
+        Course.idCounter = idCounter;
+    }
 
     public static class AdditionalMaterial {
         private AdditionalMaterial name;
@@ -59,8 +78,8 @@ public class Course {
         homeWork.setId(id);
     }
 
-    public void setHomeWorkLectureID(int lectureID) {
-        homeWork.setLectureid(lectureID);
+    public void setHomeWorkLectureID(Integer lectureID) {
+        homeWork.setLectureID(lectureID);
     }
 
     public void setHomeWorkTask(String task) {

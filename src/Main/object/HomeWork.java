@@ -3,7 +3,7 @@ package Main.object;
 public class HomeWork {
     private String name;
     private String task;
-    private long id;
+    private Integer id;
     private long lectureID;
     private static int idCounter = 0;
 
@@ -34,7 +34,7 @@ public class HomeWork {
         return lectureID;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class HomeWork {
         return id;
     }
 
-    public void setLectureid(long lectureID) {
+    public void setLectureID(Integer lectureID) {
         this.lectureID = lectureID;
     }
 
