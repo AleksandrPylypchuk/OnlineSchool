@@ -1,7 +1,10 @@
 package Main.object;
 
+import Main.Enum.Role;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Person {
     private Role role;
@@ -88,6 +91,12 @@ public class Person {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    public static List<Person> createPersonList(Person[] persons) {
+        List<Person> personList = new ArrayList<>();
+        for (Person person : persons) {
+            personList.add(person);
+        }
+        return personList;
+    }
 
 }

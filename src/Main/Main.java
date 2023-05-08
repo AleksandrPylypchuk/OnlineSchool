@@ -1,29 +1,30 @@
 package Main;
 
-import Main.interator.SimpleIterator;
+import Main.Enum.ResurceType;
 import Main.object.*;
 import Main.repository.*;
 import service.Service;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Main.object.Person;
-import Main.object.Role;
+import Main.Enum.Role;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.crypto.spec.PSource;
 
 public class Main {
     public static void main(String[] args) {
+        AdditionalMaterialRepository additionalMaterialRepository = new AdditionalMaterialRepository();
+        AdditionalMaterial additionalMaterial = new AdditionalMaterial(1,"Material#1", 1, ResurceType.BOOK);
+        additionalMaterialRepository.add(additionalMaterial);
 
         PersonRepository personRepository = new PersonRepository();
         CourseRepository courseRepository = new CourseRepository();
         HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
 
-        personRepository.addPerson(new Person(Role.TEACHER, "Miroslav", "Bykov", "miroslav@gmail.com", "+3809912345678", 1));
-        personRepository.addPerson(new Person(Role.TEACHER, "Mykola", "Petrov", "Mykola@gmail.com", "+3809812345678", 2));
-        personRepository.addPerson(new Person(Role.STUDENT, "Taras", "Repitor", "Taras@Gmail.com", "+3809712345678", 1));
-        personRepository.addPerson(new Person(Role.STUDENT, "Andrii", "Charlz", "Andrii@gmail.com", "+3805012345678", 2));
         HomeWork homeTask1 = new HomeWork( 1, "Second homework for Course 1");
         homeWorkRepository.add(homeTask1);
         courseRepository.addCourse(new Course(1, "FirstCourse"));
@@ -34,7 +35,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int a = 0;
 
-
+        List<Person> personList = personRepository.getPersonList();
 
 
         while (a != -1) {
@@ -46,10 +47,11 @@ public class Main {
             System.out.println("2: Lectors");
             System.out.println("3: Students");
             System.out.println("4: HomeWork");
-            System.out.println("5: Service");
+            System.out.println("5: Additional material");
+            System.out.println("6: Service");
             try {
                 a = scanner.nextInt();
-                if (a < 0 || a > 5) {
+                if (a < 0 || a > 6) {
                     throw new InputMismatchException("Invalid Category! Please enter a correct category");
                 }
             } catch (InputMismatchException e) {
@@ -61,7 +63,7 @@ public class Main {
             }
 
 
-            Person[] persons = personRepository.getPersonArrays();
+
             HomeWork[] homeWorks = homeWorkRepository.get();
             String addName, firstName, lastName, phoneNumber, email, description;
             int addID = 0, addlectureID;
@@ -98,118 +100,25 @@ public class Main {
                     break;
                 case 2:
                     System.out.printf("Your choose are Lectors\n");
-                    for (int i = 0; i < persons.length; i++) {
-                        if (persons[i] != null) {
-                            if (persons[i].getRole() == Role.TEACHER) {
-                                System.out.println(persons[i]);
-                            }
-                        }
-                    }
-
-                    while (true) {
-                        System.out.println("Do you want create new Lector: Y/N");
-                        String scanning2 = scanner.next();
-                        if (scanning2.equalsIgnoreCase("Y")) {
-                            System.out.println("Add Firstname of Lector\n");
-                            firstName = scanner.next();
-                            System.out.println("Add Lastname of Lector\n");
-                            lastName = scanner.next();
-                            System.out.println("Add email of Lector\n");
-                            email = scanner.next();
-                            System.out.println("Add phone of Lector\n");
-                            phoneNumber = scanner.next();
-
-                            boolean valid = false;
-                            while (!valid) {
-                                try {
-                                    System.out.println("Add ID of Course max is "+ courseRepository.getCourseArrays().length);
-                                    addID = scanner.nextInt();
-                                    if (addID < 1 || addID > courseRepository.getCourseArrays().length) {
-                                        throw new InputMismatchException("Invalid ID! Please enter a correct ID");
-                                    } else {
-                                        valid = true;
-                                    }
-                                } catch (InputMismatchException e) {
-                                    System.out.println(e.getMessage());
-                                    System.out.println("Invalid ID! Please enter a correct ID");
-                                    scanner.nextLine();
-                                }
-                            }
-                            personRepository.addPerson(new Person(Role.TEACHER, firstName, lastName, email, phoneNumber, addID));
-
-                        } else if (scanning2.equalsIgnoreCase("N")) {
-                             break;
-                        } else {
-                            System.out.println("Invalid input! Please enter 'Y' or 'N'");
-
-                        }
-                    }
-                    persons = personRepository.getPersonArrays();
-                    for (int i = 0; i < persons.length; i++) {
-                        if (persons[i] != null) {
-                            if (persons[i].getRole() == Role.TEACHER) {
-                                System.out.println(persons[i]);
-                            }
+                    List<Person> lecturers = personRepository.getPersonList();
+                    for (Person lecturer : lecturers) {
+                        if (lecturer.getRole() == Role.TEACHER) {
+                            System.out.println(lecturer);
                         }
                     }
                     break;
+
                 case 3:
-                    System.out.printf("Your choose are Student\n");
-                    for (int i = 0; i < persons.length; i++) {
-                        if (persons[i] != null) {
-                            if (persons[i].getRole() == Role.STUDENT) {
-                                System.out.println(persons[i]);
-                            }
-                        }
-                    }
-
-                    while (true) {
-                        System.out.println("Do you want create new Student: Y/N");
-                        String scanning2 = scanner.next();
-                        if (scanning2.equalsIgnoreCase("Y")) {
-                            System.out.println("Add Firstname of Student\n");
-                            firstName = scanner.next();
-                            System.out.println("Add Lastname of Student\n");
-                            lastName = scanner.next();
-                            System.out.println("Add email of Student\n");
-                            email = scanner.next();
-                            System.out.println("Add phone of Student\n");
-                            phoneNumber = scanner.next();
-
-                            boolean valid = false;
-                            while (!valid) {
-                                try {
-                                    System.out.println("Add ID of Course max is "+ courseRepository.getCourseArrays().length);
-                                    addID = scanner.nextInt();
-                                    if (addID < 1 || addID > courseRepository.getCourseArrays().length) {
-                                        throw new InputMismatchException("Invalid ID! Please enter a correct ID");
-                                    } else {
-                                        valid = true;
-                                    }
-                                } catch (InputMismatchException e) {
-                                    System.out.println(e.getMessage());
-                                    System.out.println("Invalid ID! Please enter a correct ID");
-                                    scanner.nextLine();
-                                }
-                            }
-                            personRepository.addPerson(new Person(Role.STUDENT, firstName, lastName, email, phoneNumber, addID));
-
-                        } else if (scanning2.equalsIgnoreCase("N")) {
-                            break;
-                        } else {
-                            System.out.println("Invalid input! Please enter 'Y' or 'N'");
-
-                        }
-                    }
-                    persons = personRepository.getPersonArrays();
-                    for (int i = 0; i < persons.length; i++) {
-                        if (persons[i] != null) {
-                            if (persons[i].getRole() == Role.STUDENT) {
-                                System.out.println(persons[i]);
-                            }
-                        }
+                    System.out.println("Your choose are Students");
+                    List<Person> students = personRepository.getPersonList().stream()
+                            .filter(p -> p.getRole() == Role.STUDENT)
+                            .collect(Collectors.toList());
+                    for (Person student : students) {
+                        System.out.println(student);
                     }
                     break;
+
+
                 case 4:
                     System.out.println("Your choose are Home Task\n");
                     System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
@@ -231,12 +140,47 @@ public class Main {
                         }
                     }
                     break;
-
                 case 5:
+                    System.out.println("Choose category of Additional materials: ");
+                    System.out.println(additionalMaterialRepository.getAllAdditionalMaterials().toString());
+                    System.out.println("Do you want create new Additional material: Y/N");
+                    String scanning5 = scanner.next();
+                    while (scanning5.equalsIgnoreCase("y")) {
+                        System.out.println("Enter id of the Additional material:");
+                        int id = scanner.nextInt();
+                        while (additionalMaterialRepository.getAdditionalMaterialById(id) != null) {
+                            System.out.println("The id is already taken. Enter a unique id:");
+                            id = scanner.nextInt();
+                        }
+                        System.out.println("Enter name of the Additional material:");
+                        String name = scanner.next();
+                        System.out.println("Enter lecture id of the Additional material:");
+                        int lectureId = scanner.nextInt();
+                        System.out.println("Enter resource type of the Additional material (choose from BOOK, URL, VIDEO):");
+                        String resourceType = scanner.next().toUpperCase();
+                        while (!Arrays.asList("BOOK", "URL", "VIDEO").contains(resourceType)) {
+                            System.out.println("Invalid resource type. Choose from BOOK, URL, VIDEO:");
+                            resourceType = scanner.next().toUpperCase();
+                        }
+                        if (resourceType.equals("BOOK")) {
+                            additionalMaterialRepository.add(new AdditionalMaterial(id, name, lectureId, ResurceType.BOOK));
+                        }
+                        if (resourceType.equals("URL")) {
+                            additionalMaterialRepository.add(new AdditionalMaterial(id, name, lectureId, ResurceType.URL));
+                        }
+                        if (resourceType.equals("VIDEO")) {
+                            additionalMaterialRepository.add(new AdditionalMaterial(id, name, lectureId, ResurceType.VIDEO));
+                        }
+                        System.out.println("Do you want create new Additional material: Y/N");
+                        scanning5 = scanner.next();
+                    }
+                    break;
+                case 6:
                     System.out.println("Choose category of Service: ");
                     System.out.println("1: Courses");
                     System.out.println("2: Persons");
                     System.out.println("3: Home Work");
+                    System.out.println("4: Additional material");
 
 
                     a = scanner.nextInt();
@@ -267,15 +211,18 @@ public class Main {
                             }
                             break;
                         case 2:
-                            System.out.println("Your choose Persons");
-                            SimpleIterator<Person> iterator = personRepository.getAll();
-                            while(iterator.hasNext()) {
-                                System.out.println(iterator.next());}
-                            break;
 
+
+                         for (Person person : personList) {
+                System.out.println(person);
+            }
+                        break;
                         case 3:
                             System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
                             break;
+                        case 4:
+                            System.out.println(additionalMaterialRepository.getAllAdditionalMaterials().toString());
+                   break;
                     }
 
                     break;
