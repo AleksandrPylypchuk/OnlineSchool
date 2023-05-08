@@ -2,6 +2,9 @@ package Main.repository;
 
 import Main.object.Course;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import static service.CoursesService.Counting;
 import static service.CoursesService.ID;
 
@@ -71,8 +74,16 @@ public class CourseRepository implements CourseRepositoryInterface {
         }
         return b.append("").toString();
     }
+    public Course[] sortByName() {
+        Course[] courses = getCourseArrays();
+        Arrays.sort(courses, Comparator.nullsLast(Comparator.comparing(Course::getName)));
+        return courses;
+    }
 
 }
+
+
+
 
 
 

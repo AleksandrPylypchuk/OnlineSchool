@@ -82,6 +82,10 @@ public class Course {
         homeWork.setLectureID(lectureID);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setHomeWorkTask(String task) {
         homeWork.setTask(task);
     }

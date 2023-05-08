@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import Main.object.Person;
 import Main.Enum.Role;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,20 +19,20 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         AdditionalMaterialRepository additionalMaterialRepository = new AdditionalMaterialRepository();
-        AdditionalMaterial additionalMaterial = new AdditionalMaterial(1,"Material#1", 1, ResurceType.BOOK);
+        AdditionalMaterial additionalMaterial = new AdditionalMaterial(1, "Material#1", 1, ResurceType.BOOK);
         additionalMaterialRepository.add(additionalMaterial);
 
         PersonRepository personRepository = new PersonRepository();
         CourseRepository courseRepository = new CourseRepository();
         HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
 
-        HomeWork homeTask1 = new HomeWork( 1, "Second homework for Course 1");
+        HomeWork homeTask1 = new HomeWork(1, "Second homework for Course 1");
         homeWorkRepository.add(homeTask1);
         courseRepository.addCourse(new Course(1, "FirstCourse"));
-        homeWorkRepository.add(new HomeWork( 1, "Second homework for Course 1"));
-        homeWorkRepository.add(new HomeWork( 1, "Third homework for Course 1"));
-        homeWorkRepository.add(new HomeWork( 2, "Fourth homework for Course 2"));
-        courseRepository.addCourse(new Course( "SecondCourse", new HomeWork( 1, "First homework with Course #2")));
+        homeWorkRepository.add(new HomeWork(1, "Second homework for Course 1"));
+        homeWorkRepository.add(new HomeWork(1, "Third homework for Course 1"));
+        homeWorkRepository.add(new HomeWork(2, "Fourth homework for Course 2"));
+        courseRepository.addCourse(new Course("SecondCourse", new HomeWork(1, "First homework with Course #2")));
         Scanner scanner = new Scanner(System.in);
         int a = 0;
 
@@ -61,7 +62,6 @@ public class Main {
             if (a == -1) {
                 break;
             }
-
 
 
             HomeWork[] homeWorks = homeWorkRepository.get();
@@ -189,7 +189,8 @@ public class Main {
                     switch (a) {
 
                         case 1:
-                            System.out.println(Service.ServicePrinting(courseRepository.getCourseArrays()));
+                            Course[] sortedCourses = courseRepository.sortByName();
+                            System.out.println(Service.ServicePrinting(sortedCourses));
                             System.out.println("Do you want create new Course: Y/N");
                             String scanning1 = scanner.next();
                             while (true) {
@@ -211,18 +212,16 @@ public class Main {
                             }
                             break;
                         case 2:
-
-
-                         for (Person person : personList) {
-                System.out.println(person);
-            }
-                        break;
+                            for (Person person : personList) {
+                                System.out.println(person);
+                            }
+                            break;
                         case 3:
                             System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
                             break;
                         case 4:
                             System.out.println(additionalMaterialRepository.getAllAdditionalMaterials().toString());
-                   break;
+                            break;
                     }
 
                     break;
