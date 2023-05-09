@@ -15,7 +15,12 @@ public class PersonRepository implements PersonInterface {
     private SimpleIterator<Person> iterator;
 
     private List<Person> personList;
+    @Repository
+    public interface StudentRepository extends JpaRepository<Student, Long> {
 
+        List<Student> findAllByOrderByLastNameAsc();
+
+    }
     public PersonRepository() {
         personRepositoryService = new RepositoryService<>();
         personList = new ArrayList<>();
