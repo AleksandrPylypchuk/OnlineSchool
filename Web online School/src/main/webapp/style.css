@@ -1,0 +1,28 @@
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    max-width: 1200px;
+}
+
+
+.nav-container {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+.text-container {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+
+tr:nth-child(even) a {
+    color: blue;
+}
