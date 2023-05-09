@@ -1,31 +1,24 @@
 package Main.repository;
 
 import Main.object.Course;
+import Main.object.Person;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
+
 import static service.CoursesService.Counting;
-import static service.CoursesService.ID;
 
-
-public class CourseRepository implements CourseRepositoryInterface{
+public class CourseRepository implements CourseRepositoryInterface {
 
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];
-
-    private List<Course> courses = new ArrayList();
+    private List<Course> courses = new ArrayList<>();
 
     public void addCourse(Course course) {
-
-
         for (int i = 0; i < courseArrays.length; i++) {
             Course existingCourse = courseArrays[i];
             if (existingCourse != null && existingCourse.getLectureID() == course.getLectureID()) {
-              return;
+                return;
             }
             if (existingCourse == null) {
                 courseArrays[i] = course;
@@ -39,21 +32,23 @@ public class CourseRepository implements CourseRepositoryInterface{
         }
     }
 
-
     private void increasingArray() {
         int tempCapacity = CAPACITY;
         CAPACITY = (CAPACITY * 3) / 2 + 1;
         Course[] tempCourseArrays = new Course[CAPACITY];
         System.arraycopy(courseArrays, 0, tempCourseArrays, 0, tempCapacity);
         courseArrays = tempCourseArrays;
-
     }
 
     public Object getByID(Object[] a, int ID) {
         ID--;
-
-        return a[ID];
+        if (a[ID] != null) {
+            return a[ID];
+        } else {
+            return null;
+        }
     }
+
     public static CourseRepository getInstance() {
         return new CourseRepository();
     }
@@ -62,17 +57,23 @@ public class CourseRepository implements CourseRepositoryInterface{
         return courseArrays;
     }
 
-
     public Object getByID(int ID) {
         ID--;
-        return courseArrays[ID];
+        if (courseArrays[ID] != null) {
+            return courseArrays[ID];
+        } else {
+            return null;
+        }
     }
 
     public Object deleteByID(int ID) {
         ID--;
-        return courseArrays[ID] = null;
+        if (courseArrays[ID] != null) {
+            return courseArrays[ID] = null;
+        } else {
+            return null;
+        }
     }
-
     public String getAll(Object[] a) {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < a.length; i++) {
@@ -112,5 +113,23 @@ public class CourseRepository implements CourseRepositoryInterface{
             }
         }
     }
+    public void printCoursesGroupedByLecturer() {
+        Map<Person, List<Course>> coursesByLecturer = new HashMap<>();
+        for (Course course : courses) {
+            if (course.getLecturer() != null) {
+                List<Course> coursesForLecturer = coursesByLecturer.getOrDefault(course.getLecturer(), new ArrayList<>());
+                coursesForLecturer.add(course);
+                coursesByLecturer.put(course.getLecturer(), coursesForLecturer);
+            }
+        }
+        for (Map.Entry<Person, List<Course>> entry : coursesByLecturer.entrySet()) {
+            System.out.println("Courses taught by " + entry.getKey().getLastname() + ":");
+            for (Course course : entry.getValue()) {
+                System.out.println("- " + course.getName());
+            }
+        }
+    }
+
+
 
 }

@@ -5,9 +5,9 @@ import Main.interator.SimpleIterator;
 import Main.object.Person;
 import Main.Enum.Role;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.*;
 
 public class PersonRepository implements PersonInterface {
 
@@ -22,32 +22,45 @@ public class PersonRepository implements PersonInterface {
         personList.add(new Person(Role.TEACHER, "Miroslav", "Bykov", "miroslav@gmail.com", "+3809912345678", 1));
         personList.add(new Person(Role.TEACHER, "Mykola", "Petrov", "Mykola@gmail.com", "+3809812345678", 2));
         personList.add(new Person(Role.STUDENT, "StudentFirstname1", "StudentLastname1", "Student1@Gmail.com", "StudentPhoneNumber1", 1));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname2", "StudentLastname2", "Student2@Gmail.com", "StudentPhoneNumber2", 2));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname2", "StudentLastname2", "Student1@Gmail.com", "StudentPhoneNumber2", 2));
         personList.add(new Person(Role.STUDENT, "StudentFirstname3", "StudentLastname3", "Student3@Gmail.com", "StudentPhoneNumber3", 1));
         personList.add(new Person(Role.STUDENT, "StudentFirstname4", "StudentLastname4", "Student4@Gmail.com", "StudentPhoneNumber4", 2));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname5", "StudentLastname5", "Student5@Gmail.com", "StudentPhoneNumber5", 1));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname6", "StudentLastname6", "Student6@Gmail.com", "StudentPhoneNumber6", 2));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname7", "StudentLastname7", "Student7@Gmail.com", "StudentPhoneNumber7", 1));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname8", "StudentLastname8", "Student8@Gmail.com", "StudentPhoneNumber8", 2));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname9", "StudentLastname9", "Student9@Gmail.com", "StudentPhoneNumber9", 1));
-        personList.add(new Person(Role.STUDENT, "StudentFirstname10", "StudentLastname10", "Student10@Gmail.com", "StudentPhoneNumber10", 2));
+
 
         iterator = new SimpleIterator<>(personList.toArray(new Person[0]));
     }
-
+    public void printPersonMap() {
+        Map<String, String> personMap = new HashMap<>();
+        for (Person person : personList) {
+            personMap.put(person.getEmail(), person.getLastname() + " " + person.getFirstname());
+        }
+        System.out.println(personMap);
+    }
     public List<Person> getPersonList() {
         return personList;
     }
-
+    public boolean isEmailAlreadyExist(String email) {
+        for (Person person : personList) {
+            if (person.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public SimpleIterator<Person> getAll() {
         return new SimpleIterator<>(personList.toArray(new Person[0]));
     }
 
     public void addPerson(Person person) {
-        personRepositoryService.add(person);
-        personList.add(person);
-        iterator = new SimpleIterator<>(personList.toArray(new Person[0]));
+        if (!isEmailAlreadyExist(person.getEmail())) {
+            personRepositoryService.add(person);
+            personList.add(person);
+            iterator = new SimpleIterator<>(personList.toArray(new Person[0]));
+        } else {
+            System.out.println("Person with email " + person.getEmail() + " already exists");
+        }
     }
+
 
 
     public void remove(int index) {
@@ -73,6 +86,22 @@ public class PersonRepository implements PersonInterface {
             }
         }
         throw new EntityNotFoundException("Person with ID " + id + " not found");
+    }
+    public void writeStudentEmailsToFile(String filename) {
+        try (PrintWriter writer = new PrintWriter(filename)) {
+            List<Person> students = new ArrayList<>();
+            for (Person person : personList) {
+                if (person.getRole() == Role.STUDENT) {
+                    students.add(person);
+                }
+            }
+            students.sort(Comparator.comparing(Person::getEmail));
+            for (Person student : students) {
+                writer.println(student.getEmail());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -38,8 +38,16 @@ public class Main {
         CourseData courseData = new CourseData(courses, homeWork, persons);
         courseData.backup("backup.dat");
 
+        courseRepository.printCoursesGroupedByLecturer();
+        additionalMaterialRepository.printAdditionalMaterialsGroupedByCourse();
+        personRepository.printPersonMap();
+        PersonRepository repository = new PersonRepository();
+        repository.writeStudentEmailsToFile("students.txt");
+
         Scanner scanner = new Scanner(System.in);
         int a = 0, b = 0, c = 0;
+
+
 
         while (a != -1) {
 
@@ -79,6 +87,20 @@ public class Main {
                     while (!validID) {
                         try {
                             System.out.println(courseRepository.getAll(courseRepository.getCourseArrays()));
+
+                            int maxMaterials = 0;
+                            Course mostMaterialsCourse = null;
+                            for (Course course : courseRepository.getCourseArrays()) {
+                                int numMaterials = course.getNumAdditionalMaterials();
+                                if (numMaterials > maxMaterials) {
+                                    maxMaterials = numMaterials;
+                                    mostMaterialsCourse = course;
+                                }
+                            }
+                            if (mostMaterialsCourse != null) {
+                                System.out.println("Course with most materials: " + mostMaterialsCourse.getName());
+                                System.out.println("Additional material are: " + maxMaterials);
+                            }
                             System.out.println("__________________________________");
                             System.out.println("Choose your Course");
                             a = scanner.nextInt();
@@ -103,6 +125,7 @@ public class Main {
                             System.out.println(material);
                         }
                     }
+
                     System.out.println("1: Work with AdditionalMaterial");
                     System.out.println("2: Work with Homework");
                     b = scanner.nextInt();

@@ -4,39 +4,58 @@ package Main.object;
 import Main.CreateCourse;
 
 import java.io.Serializable;
-
+import Main.object.AdditionalMaterial;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 public class Course implements Serializable {
     private String name;
     private Integer lectureID;
     private static Integer ID = 1;
     private int identifier;
-    private Lector lectors;
+    private Lector lector;
     private AdditionalMaterial material;
     private HomeWork homeWork;
     private static int idCounter = 1;
     private Date creationDate;
     private Date courseDate;
+    private List<AdditionalMaterial> additionalMaterials;
+    private Person lecturer;
 
     public void printCourseDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, EEEE HH:mm:ss");
         System.out.println(dateFormat.format(courseDate));
     }
 
+    public Person getLecturer() {
+        return lecturer;
+    }
 
+    public void setLecturer(Person lecturer) {
+        this.lecturer = lecturer;
+    }
 
     public Course(int lectureID, String name) {
         this.name = name;
         this.lectureID = idCounter++;
-        this.creationDate = new Date(); // устанавливаем текущую дату при создании курса
+        this.creationDate = new Date();
+        this.additionalMaterials = new ArrayList<>();
+        this.lecturer = lecturer;
     }
+
+
 
     public Course(String name, HomeWork homeWork) {
         this.name = name;
         this.homeWork = homeWork;
         this.lectureID = idCounter++;
-        this.creationDate = new Date(); // устанавливаем текущую дату при создании курса
+        this.creationDate = new Date();
+        this.additionalMaterials = new ArrayList<>();
+    }
+    public Lector getLector() {
+        return lector;
     }
     public Date getCreationDate() {
         return creationDate;
@@ -108,5 +127,10 @@ public class Course implements Serializable {
     public void setHomeWorkTask(String task) {
         homeWork.setTask(task);
     }
+    public int getNumAdditionalMaterials() {
+        return additionalMaterials.size();
+    }
+
+
 }
 
