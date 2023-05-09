@@ -1,0 +1,22 @@
+SELECT * FROM students ORDER BY name;
+
+SELECT l.name, COUNT(*) as num_additional_materials
+FROM lessons l JOIN tasks am ON l.id=am.lesson_id
+WHERE l.created_at < '2023-01-01'
+GROUP BY l.id
+ORDER BY l.created_at;
+
+SELECT l.name, COUNT(*) as num_tasks
+FROM lessons l JOIN tasks t ON l.id=t.lesson_id
+GROUP BY l.id
+ORDER BY l.created_at, num_tasks DESC
+LIMIT 1;
+
+
+SELECT * FROM teachers WHERE name < 'N%';
+
+SELECT s.name, COUNT(*) as num_courses
+FROM students s JOIN students_courses sc ON s.id=sc.student_id
+GROUP BY s.id
+HAVING num_courses=1 OR num_courses=2 OR num_courses>=3
+ORDER BY s.name;

@@ -1,0 +1,25 @@
+FROM lessons
+JOIN courses ON courses.id = lessons.course_id
+JOIN teachers ON teachers.id = courses.teacher_id
+ORDER BY lessons.created_at;
+
+SELECT teachers.name, COUNT(lessons.id) as lecture_count
+FROM teachers
+         JOIN courses ON courses.teacher_id = teachers.id
+         JOIN lessons ON lessons.course_id = courses.id
+GROUP BY teachers.id;
+
+SELECT lessons.name, lessons.created_at
+FROM lessons
+         JOIN courses ON courses.id = lessons.course_id
+WHERE courses.teacher_id = 3
+ORDER BY lessons.created_at;
+
+SELECT DATE_FORMAT(lessons.created_at, '%M') AS month_name, COUNT(lessons.id) AS lecture_count
+FROM lessons
+GROUP BY month_name;
+
+SELECT
+    IF(COUNT(DISTINCT tasks.id) > COUNT(DISTINCT tasks.id), 'Tasks', 'Materials') AS more_data,
+    IF(COUNT(DISTINCT tasks.id) > COUNT(DISTINCT tasks.id), COUNT(DISTINCT tasks.id), COUNT(DISTINCT materials.id)) AS more_data_count
+FROM tasks, tasks;

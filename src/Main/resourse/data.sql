@@ -100,3 +100,5 @@ INSERT INTO tasks (name, description, deadline, lesson_id) VALUES
                                                                ('Kinematics Problems', 'Solve the following kinematics problems:...', '2023-06-15 12:00:00', 2),
                                                                ('Balancing Chemical Equations', 'Balance the following chemical equations:...', '2023-06-10 12:00:00', 3),
                                                                ('Java Basics', 'Write a Java program that...', '2023-06-05 12:00:00', 4);
+
+
