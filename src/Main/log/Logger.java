@@ -11,16 +11,34 @@ public class Logger {
         this.logs = new ArrayList<>();
     }
 
-    public void log(String name, LogLevel level, String message) {
-        Log log = new Log(name, level, message, LocalDateTime.now());
+    public void logError(String name, String message) {
+        Log log = new Log(name, LogLevel.ERROR, message, LocalDateTime.now());
+        logs.add(log);
+        System.err.println(log.toString());
+    }
+
+    public void logWarning(String name, String message, Throwable throwable) {
+        Log log = new Log(name, LogLevel.WARNING, message, LocalDateTime.now(), throwable.toString());
         logs.add(log);
         System.out.println(log.toString());
     }
 
-    public void log(String name, LogLevel level, String message, Throwable throwable) {
-        Log log = new Log(name, level, message, LocalDateTime.now(), throwable.toString());
+    public void logInfo(String name, String message) {
+        Log log = new Log(name, LogLevel.INFO, message, LocalDateTime.now());
         logs.add(log);
         System.out.println(log.toString());
+    }
+
+    public void logDebug(String name, String message) {
+        Log log = new Log(name, LogLevel.DEBUG, message, LocalDateTime.now());
+        logs.add(log);
+        System.out.println(log.toString());
+    }
+
+    public void printLogs() {
+        for (Log log : logs) {
+            System.out.println(log.toString());
+        }
     }
 
     public List<Log> getLogs() {

@@ -1,5 +1,6 @@
 package Main;
 import Main.Enum.ResurceType;
+import Main.log.Logger;
 import Main.object.*;
 import Main.repository.*;
 import service.Service;
@@ -9,6 +10,13 @@ import Main.Enum.Role;
 
 public class Main {
     public static void main(String[] args) {
+        Logger logger = new Logger();
+        logger.logError("Course", "Error message");
+        logger.logWarning("Course", "Warning message", new Exception("Something went wrong"));
+        logger.logInfo("Course", "Info message");
+        logger.logDebug("Course", "Debug message");
+
+
         AdditionalMaterialRepository additionalMaterialRepository = new AdditionalMaterialRepository();
         additionalMaterialRepository.add(new AdditionalMaterial(1, "First Material#1", 1, ResurceType.BOOK));
         additionalMaterialRepository.add(new AdditionalMaterial(2, "Second Material", 2, ResurceType.URL));
@@ -37,6 +45,7 @@ public class Main {
             System.out.println("4: HomeWork");
             System.out.println("5: Additional material");
             System.out.println("6: Service");
+
             try {
                 a = scanner.nextInt();
                 if (a < 0 || a > 6) {
@@ -322,5 +331,6 @@ public class Main {
             }
         }
         System.out.println("Exit");
+        logger.printLogs();
     }
 }
