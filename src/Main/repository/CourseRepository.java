@@ -9,7 +9,7 @@ import static service.CoursesService.Counting;
 import static service.CoursesService.ID;
 
 
-public class CourseRepository implements CourseRepositoryInterface {
+public class CourseRepository implements CourseRepositoryInterface{
 
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];

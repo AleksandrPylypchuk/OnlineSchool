@@ -2,11 +2,12 @@ package Main.object;
 
 import Main.Enum.Role;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Person implements Comparable<Person>{
+public class Person implements Comparable<Person>, Serializable {
     private Role role;
     private Integer courseId, id;
     private String firstname, lastname, email, phone;

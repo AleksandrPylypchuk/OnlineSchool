@@ -5,6 +5,8 @@ import Main.log.Logger;
 import Main.object.*;
 import Main.repository.*;
 import service.Service;
+
+import java.io.IOException;
 import java.util.*;
 import Main.object.Person;
 import Main.Enum.Role;
@@ -12,13 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
         Logger logger = new Logger();
-        logger.logError("Course", "Error message");
-        logger.logWarning("Course", "Warning message", new Exception("Something went wrong"));
-        logger.logInfo("Course", "Info message");
-        logger.logDebug("Course", "Debug message");
-
 
 
         AdditionalMaterialRepository additionalMaterialRepository = new AdditionalMaterialRepository();
@@ -35,10 +32,15 @@ public class Main {
         homeWorkRepository.add(new HomeWork(1, "Third homework for Course 1"));
         homeWorkRepository.add(new HomeWork(2, "Fourth homework for Course 2"));
         courseRepository.addCourse(new Course("SecondCourse", new HomeWork(1, "First homework with Course #2")));
+        List<Person> persons = personRepository.getPersonList();
+        List<HomeWork> homeWork = Arrays.asList(homeWorkRepository.get());
+        List<Course> courses = List.of(courseRepository.getCourseArrays());
+        CourseData courseData = new CourseData(courses, homeWork, persons);
+        courseData.backup("backup.dat");
 
         Scanner scanner = new Scanner(System.in);
         int a = 0, b = 0, c = 0;
-        List<Person> persons = personRepository.getPersonList();
+
         while (a != -1) {
             System.out.println("__________________________________");
             System.out.print("Enter a number (-1 to exit): ");
@@ -252,6 +254,7 @@ public class Main {
                     System.out.println("2: Persons");
                     System.out.println("3: Home Work");
                     System.out.println("4: Additional material");
+                    System.out.println("5: Backup");
                     a = scanner.nextInt();
                     if (a < 1 || a > 5) ;
                 {
@@ -331,21 +334,42 @@ public class Main {
                                 }
                             }
                             break;
+                        case 5:
+                            CourseData courseDatar = CourseData.restore("backup.dat");
+                            courses = courseDatar.getCourses();
+                            homeWork = courseDatar.getHomeworks();
+                            persons = courseDatar.getPersons();
 
+                            System.out.println("Courses:");
+                            for (Course course : courses) {
+                                System.out.println(course);
+                            }
+                            System.out.println("HomeWorks:");
+                            for (HomeWork hw : homeWork) {
+                                System.out.println(hw);
+                            }
+                            System.out.println("Persons:");
+                            for (Person person : persons) {
+                                System.out.println(person);
+                                break;
                     }
+
                     break;
 
 
                 }
 
 
-
             }
         }
-                System.out.println("Exit");
-                    logger.printLogs();
+        System.out.println("Exit");
+        logger.printLogs();
 
 
+
+
+        }
     }
 }
+
 

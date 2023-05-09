@@ -1,6 +1,8 @@
 package Main.object;
 
-public class HomeWork {
+import java.io.Serializable;
+
+public class  HomeWork implements Serializable {
     private String name;
     private String task;
     private Integer id;

@@ -3,7 +3,9 @@ package Main.object;
 
 import Main.CreateCourse;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String name;
     private Integer lectureID;
     private static Integer ID = 1;
