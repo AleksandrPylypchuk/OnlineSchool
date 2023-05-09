@@ -1,8 +1,14 @@
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Exam {
     private static final int NUM_STUDENTS = 10;
@@ -11,8 +17,15 @@ public class Exam {
     private static final int MAX_TIME = 14;
     private static final int EXAM_TIME = 12;
 
+    public static void main(String[] args) throws InterruptedException, IOException {
+        // Load logging configuration from file
+        LogManager logManager = LogManager.getLogManager();
+        FileInputStream configFile = new FileInputStream("logging.properties");
+        logManager.readConfiguration(configFile);
 
-    public static void main(String[] args) throws InterruptedException {
+        Logger logger = Logger.getLogger(Exam.class.getName());
+        logger.log(Level.INFO, "Starting exam");
+
         List<Integer> questions = new ArrayList<>();
         for (int i = 1; i <= NUM_QUESTIONS; i++) {
             questions.add(i);
@@ -30,25 +43,25 @@ public class Exam {
             new Thread(new Student(i, questions.remove(0), startLatch, finishLatch, timeLatch, onTimeStudents, lateStudents)).start();
         }
 
-        System.out.println("Exam starts in 3 seconds");
+        logger.log(Level.INFO, "Exam starts in 3 seconds");
         Thread.sleep(3000);
 
         startLatch.countDown();
 
-        System.out.println("Exam started");
+        logger.log(Level.INFO, "Exam started");
         finishLatch.await();
 
         timeLatch.await();
 
-        System.out.println("Exam finished");
+        logger.log(Level.INFO, "Exam finished");
 
         Collections.sort(onTimeStudents);
         Collections.sort(lateStudents);
 
-        System.out.println("On time students: " + onTimeStudents);
-        System.out.println("Late students: " + lateStudents);
+        logger.log(Level.INFO, "On time students: " + onTimeStudents);
+        logger.log(Level.INFO, "Late students: " + lateStudents);
 
-        System.out.println("Students who finished within exam time:");
+        logger.log(Level.INFO, "Students who finished within exam time:");
         for (int id : onTimeStudents) {
             System.out.println("Student " + id);
         }
