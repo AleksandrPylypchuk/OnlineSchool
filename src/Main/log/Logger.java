@@ -1,8 +1,10 @@
 package Main.log;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Logger {
     private List<Log> logs;
@@ -10,7 +12,10 @@ public class Logger {
     public Logger() {
         this.logs = new ArrayList<>();
     }
-
+    public static void log(String message) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:SSS");
+        System.out.println(dateFormat.format(new Date()) + " - " + message);
+    }
     public void logError(String name, String message) {
         Log log = new Log(name, LogLevel.ERROR, message, LocalDateTime.now());
         logs.add(log);

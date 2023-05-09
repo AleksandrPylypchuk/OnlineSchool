@@ -5,6 +5,8 @@ import Main.CreateCourse;
 
 import java.io.Serializable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 public class Course implements Serializable {
     private String name;
     private Integer lectureID;
@@ -14,28 +16,43 @@ public class Course implements Serializable {
     private AdditionalMaterial material;
     private HomeWork homeWork;
     private static int idCounter = 1;
+    private Date creationDate;
+    private Date courseDate;
 
-    public CreateCourse createCourse(String name) {
-        return new CreateCourse(name);
+    public void printCourseDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, EEEE HH:mm:ss");
+        System.out.println(dateFormat.format(courseDate));
     }
 
-    public void setLectureID(Integer lectureID) {
-        this.lectureID = lectureID;
-    }
+
 
     public Course(int lectureID, String name) {
         this.name = name;
-        this.lectureID = idCounter++;;
-
+        this.lectureID = idCounter++;
+        this.creationDate = new Date(); // устанавливаем текущую дату при создании курса
     }
 
     public Course(String name, HomeWork homeWork) {
         this.name = name;
         this.homeWork = homeWork;
         this.lectureID = idCounter++;
-
+        this.creationDate = new Date(); // устанавливаем текущую дату при создании курса
+    }
+    public Date getCreationDate() {
+        return creationDate;
     }
 
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getCourseDate() {
+        return courseDate;
+    }
+
+    public void setCourseDate(Date courseDate) {
+        this.courseDate = courseDate;
+    }
     public int getLectureID() {
         return lectureID;
     }
