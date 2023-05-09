@@ -1,17 +1,11 @@
 package Main;
-
 import Main.Enum.ResurceType;
 import Main.object.*;
 import Main.repository.*;
 import service.Service;
-
 import java.util.*;
-
 import Main.object.Person;
 import Main.Enum.Role;
-
-import java.util.stream.Collectors;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -19,12 +13,9 @@ public class Main {
         additionalMaterialRepository.add(new AdditionalMaterial(1, "First Material#1", 1, ResurceType.BOOK));
         additionalMaterialRepository.add(new AdditionalMaterial(2, "Second Material", 2, ResurceType.URL));
         additionalMaterialRepository.add(new AdditionalMaterial(3, "Third Material", 1, ResurceType.VIDEO));
-
-
         PersonRepository personRepository = new PersonRepository();
         CourseRepository courseRepository = new CourseRepository();
         HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
-
         HomeWork homeTask1 = new HomeWork(1, "Second homework for Course 1");
         homeWorkRepository.add(homeTask1);
         courseRepository.addCourse(new Course(1, "FirstCourse"));
@@ -33,11 +24,8 @@ public class Main {
         homeWorkRepository.add(new HomeWork(2, "Fourth homework for Course 2"));
         courseRepository.addCourse(new Course("SecondCourse", new HomeWork(1, "First homework with Course #2")));
         Scanner scanner = new Scanner(System.in);
-        int a = 0;
-
-
+        int a = 0, b = 0, c = 0;
         List<Person> persons = personRepository.getPersonList();
-
         while (a != -1) {
             System.out.println("__________________________________");
             System.out.print("Enter a number (-1 to exit): ");
@@ -61,8 +49,6 @@ public class Main {
             if (a == -1) {
                 break;
             }
-
-
             HomeWork[] homeWorks = homeWorkRepository.get();
             String addName, firstName, lastName, phoneNumber, email, description;
             int addID = 0, addlectureID;
@@ -88,14 +74,88 @@ public class Main {
                             scanner.nextLine();
                         }
                     }
-
                     System.out.println("You choose " + courseRepository.getByID(a));
                     for (HomeWork homeWorkChecked : homeWorks) {
                         if (homeWorkChecked.getLectureID() == a) {
                             System.out.println(homeWorkChecked);
                         }
                     }
+                    for (AdditionalMaterial material : additionalMaterialRepository.getAllAdditionalMaterials()) {
+                        if (material.getLectureId() == a) {
+                            System.out.println(material);
+                        }
+                    }
+                    System.out.println("1: Work with AdditionalMaterial");
+                    System.out.println("2: Work with Homework");
+                    b = scanner.nextInt();
+                    switch (b) {
+                        case 1:
+                            System.out.println("1: Add new AdditionalMaterial");
+                            System.out.println("2: Remove AdditionalMaterial");
+                            c = scanner.nextInt();
+                            switch (c) {
+                                case 1:
+                                    System.out.println("Your choose to add new additional material");
+                                    System.out.println("Enter material name:");
+                                    String name = scanner.next();
+                                    System.out.println("Enter material type (BOOK, URL, or VIDEO):");
 
+                                    ResurceType materialType = ResurceType.valueOf(scanner.next());
+                                    while (materialType == null) {
+                                        String input = scanner.nextLine().toUpperCase();
+                                        for (ResurceType type : ResurceType.values()) {
+                                            if (type.name().equals(input)) {
+                                                materialType = type;
+                                                break;
+                                            }
+                                        }
+                                        if (materialType == null) {
+                                            System.out.println("Invalid input, please enter BOOK, URL, or VIDEO:");
+                                        }
+                                    }
+
+                                    System.out.println("Enter lecture ID:");
+                                    int lectureID = scanner.nextInt();
+                                    scanner.nextLine();
+                                    AdditionalMaterial newMaterial = new AdditionalMaterial(additionalMaterialRepository.getNextID(), name, lectureID, materialType);
+                                    additionalMaterialRepository.add(newMaterial);
+                                    System.out.println("Material added successfully!");
+                                    break;
+
+                                case 2:
+                                    System.out.println("Your choose to remove additional material");
+                                    System.out.println("Enter material ID:");
+                                    int materialID = scanner.nextInt();
+                                    additionalMaterialRepository.remove(additionalMaterialRepository.getAdditionalMaterialById(materialID));
+                                    System.out.println("Material removed successfully!");
+                                    break;
+                            }
+                        case 2:
+                            System.out.println("1: Add new HomeWork");
+                            System.out.println("2: Remove HomeWork");
+                            c = scanner.nextInt();
+                            switch (c) {
+                                case 1:
+                                    System.out.println("Your choose to add new HomeWork");
+                                    System.out.println("Enter HomeWork task:");
+                                    String name = scanner.next();
+                                    System.out.println("Enter lecture ID:");
+                                    int lectureID = scanner.nextInt();
+                                    scanner.nextLine();
+                                   HomeWork newHomeWork = new HomeWork(lectureID,name);
+                                    homeWorkRepository.add(newHomeWork);
+                                    System.out.println("Homework added successfully!");
+                                    break;
+
+                                case 2:
+                                    System.out.println("Your choose to remove homework");
+                                    System.out.println("Enter homework ID:");
+                                    int homeworkID = scanner.nextInt();
+                                    homeWorkRepository.remove(homeworkID);
+                                    System.out.println("Homework removed successfully!");
+                                    break;
+                            }
+                    }
                     break;
                 case 2:
                     System.out.printf("Your choose are Lectors\n");
@@ -105,7 +165,6 @@ public class Main {
                         }
                     }
                     break;
-
                 case 3:
                     System.out.println("Your choose are Students");
                     for (Person student : persons) {
@@ -114,8 +173,6 @@ public class Main {
                         }
                     }
                     break;
-
-
                 case 4:
                     System.out.println("Your choose are Home Task\n");
                     System.out.println(Service.ServicePrinting(homeWorkRepository.get()));
@@ -139,7 +196,9 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Choose category of Additional materials: ");
-                    System.out.println(additionalMaterialRepository.getAllAdditionalMaterials().toString());
+                    for (AdditionalMaterial additionalMaterial : additionalMaterialRepository.getAllAdditionalMaterials()) {
+                        System.out.println(additionalMaterial.toString());
+                    }
                     System.out.println("Do you want create new Additional material: Y/N");
                     String scanning5 = scanner.next();
                     while (scanning5.equalsIgnoreCase("y")) {
@@ -178,13 +237,10 @@ public class Main {
                     System.out.println("2: Persons");
                     System.out.println("3: Home Work");
                     System.out.println("4: Additional material");
-
-
                     a = scanner.nextInt();
                     if (a < 1 || a > 5) ;
                 {
                     switch (a) {
-
                         case 1:
                             Course[] sortedCourses = courseRepository.sortByName();
                             System.out.println(Service.ServicePrinting(sortedCourses));
@@ -240,7 +296,6 @@ public class Main {
                             System.out.println("2: Resource Type");
                             System.out.println("3: Lecture Number");
                             int choice = scanner.nextInt();
-
                             switch (choice) {
                                 case 1:
                                     additionalMaterials = additionalMaterialRepository.sortById();
@@ -262,13 +317,9 @@ public class Main {
                             }
                             break;
                     }
-
                     break;
-
                 }
             }
-
-
         }
         System.out.println("Exit");
     }

@@ -1,70 +1,61 @@
 package Main.repository;
 
 import Main.object.AdditionalMaterial;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdditionalMaterialRepository {
-    private List<AdditionalMaterial> additionalMaterials = new ArrayList<>();
+    private Map<Integer, AdditionalMaterial> additionalMaterials = new HashMap<>();
 
     public void add(AdditionalMaterial additionalMaterial) {
-        additionalMaterials.add(additionalMaterial);
+        additionalMaterials.put(additionalMaterial.getId(), additionalMaterial);
     }
 
     public void remove(AdditionalMaterial additionalMaterial) {
-        additionalMaterials.remove(additionalMaterial);
+        additionalMaterials.remove(additionalMaterial.getId());
     }
 
+    public int getNextID() {
+        int maxID = 0;
+        for (AdditionalMaterial additionalMaterial : additionalMaterials.values()) {
+            if (additionalMaterial.getId() > maxID) {
+                maxID = additionalMaterial.getId();
+            }
+        }
+        return maxID + 1;
+    }
     public void update(AdditionalMaterial additionalMaterial) {
-        for (int i = 0; i < additionalMaterials.size(); i++) {
-            if (additionalMaterials.get(i).getId() == additionalMaterial.getId()) {
-                additionalMaterials.set(i, additionalMaterial);
-                break;
-            }
-        }
-    }
-    public AdditionalMaterial getAdditionalMaterialById(int id) {
-        for (AdditionalMaterial additionalMaterial : additionalMaterials) {
-            if (additionalMaterial.getId() == id) {
-                return additionalMaterial;
-            }
-        }
-        return null;
+        additionalMaterials.put(additionalMaterial.getId(), additionalMaterial);
     }
 
-    public AdditionalMaterial get(int id) {
-        for (AdditionalMaterial additionalMaterial : additionalMaterials) {
-            if (additionalMaterial.getId() == id) {
-                return additionalMaterial;
-            }
-        }
-        return null;
+    public AdditionalMaterial getAdditionalMaterialById(int id) {
+        return additionalMaterials.get(id);
     }
 
     public List<AdditionalMaterial> getAllAdditionalMaterials() {
-        return additionalMaterials;
+        return new ArrayList<>(additionalMaterials.values());
     }
 
     public List<AdditionalMaterial> sortById() {
-        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials);
+        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials.values());
         Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getId));
         return sortedList;
     }
 
-
     public List<AdditionalMaterial> sortByLectureID() {
-        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials);
+        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials.values());
         Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getLectureId));
         return sortedList;
     }
 
-
     public List<AdditionalMaterial> sortByType() {
-        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials);
+        List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials.values());
         Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getResourceType));
         return sortedList;
     }
-
 }
