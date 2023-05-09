@@ -1,4 +1,5 @@
 package Main;
+
 import Main.Enum.ResurceType;
 import Main.log.Logger;
 import Main.object.*;
@@ -7,14 +8,17 @@ import service.Service;
 import java.util.*;
 import Main.object.Person;
 import Main.Enum.Role;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Logger logger = new Logger();
         logger.logError("Course", "Error message");
         logger.logWarning("Course", "Warning message", new Exception("Something went wrong"));
         logger.logInfo("Course", "Info message");
         logger.logDebug("Course", "Debug message");
+
 
 
         AdditionalMaterialRepository additionalMaterialRepository = new AdditionalMaterialRepository();
@@ -31,6 +35,7 @@ public class Main {
         homeWorkRepository.add(new HomeWork(1, "Third homework for Course 1"));
         homeWorkRepository.add(new HomeWork(2, "Fourth homework for Course 2"));
         courseRepository.addCourse(new Course("SecondCourse", new HomeWork(1, "First homework with Course #2")));
+
         Scanner scanner = new Scanner(System.in);
         int a = 0, b = 0, c = 0;
         List<Person> persons = personRepository.getPersonList();
@@ -46,9 +51,10 @@ public class Main {
             System.out.println("5: Additional material");
             System.out.println("6: Service");
 
+
             try {
                 a = scanner.nextInt();
-                if (a < 0 || a > 6) {
+                if (a < 0 || a > 7) {
                     throw new InputMismatchException("Invalid Category! Please enter a correct category");
                 }
             } catch (InputMismatchException e) {
@@ -151,7 +157,7 @@ public class Main {
                                     System.out.println("Enter lecture ID:");
                                     int lectureID = scanner.nextInt();
                                     scanner.nextLine();
-                                   HomeWork newHomeWork = new HomeWork(lectureID,name);
+                                    HomeWork newHomeWork = new HomeWork(lectureID, name);
                                     homeWorkRepository.add(newHomeWork);
                                     System.out.println("Homework added successfully!");
                                     break;
@@ -325,12 +331,21 @@ public class Main {
                                 }
                             }
                             break;
+
                     }
                     break;
+
+
                 }
+
+
+
             }
         }
-        System.out.println("Exit");
-        logger.printLogs();
+                System.out.println("Exit");
+                    logger.printLogs();
+
+
     }
 }
+

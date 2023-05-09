@@ -21,8 +21,17 @@ public class PersonRepository implements PersonInterface {
         personList = new ArrayList<>();
         personList.add(new Person(Role.TEACHER, "Miroslav", "Bykov", "miroslav@gmail.com", "+3809912345678", 1));
         personList.add(new Person(Role.TEACHER, "Mykola", "Petrov", "Mykola@gmail.com", "+3809812345678", 2));
-        personList.add(new Person(Role.STUDENT, "Taras", "Repitor", "Taras@Gmail.com", "+3809712345678", 1));
-        personList.add(new Person(Role.STUDENT, "Andrii", "Charlz", "Andrii@gmail.com", "+3805012345678", 2));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname1", "StudentLastname1", "Student1@Gmail.com", "StudentPhoneNumber1", 1));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname2", "StudentLastname2", "Student2@Gmail.com", "StudentPhoneNumber2", 2));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname3", "StudentLastname3", "Student3@Gmail.com", "StudentPhoneNumber3", 1));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname4", "StudentLastname4", "Student4@Gmail.com", "StudentPhoneNumber4", 2));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname5", "StudentLastname5", "Student5@Gmail.com", "StudentPhoneNumber5", 1));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname6", "StudentLastname6", "Student6@Gmail.com", "StudentPhoneNumber6", 2));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname7", "StudentLastname7", "Student7@Gmail.com", "StudentPhoneNumber7", 1));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname8", "StudentLastname8", "Student8@Gmail.com", "StudentPhoneNumber8", 2));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname9", "StudentLastname9", "Student9@Gmail.com", "StudentPhoneNumber9", 1));
+        personList.add(new Person(Role.STUDENT, "StudentFirstname10", "StudentLastname10", "Student10@Gmail.com", "StudentPhoneNumber10", 2));
+
         iterator = new SimpleIterator<>(personList.toArray(new Person[0]));
     }
 
