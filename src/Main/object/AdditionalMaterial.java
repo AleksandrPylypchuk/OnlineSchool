@@ -3,47 +3,46 @@ package Main.object;
 import Main.Enum.ResurceType;
 import Main.repository.CourseRepository;
 
-
 public class AdditionalMaterial {
 
-    private int id;
+    private Integer id;
     private String name;
-    private long lectureId;
+    private Long lectureId;
     private ResurceType resourceType;
 
-    public AdditionalMaterial(int id, String name, long lectureId, ResurceType resourceType) {
+    public AdditionalMaterial(Integer id, String name, int lectureId, ResurceType resourceType) {
         this.id = id;
         this.name = name;
-        this.lectureId = lectureId;
+        this.lectureId = (long) lectureId;
         this.resourceType = resourceType;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public long getLectureId() {
-        return lectureId;
-    }
-
-    public ResurceType getResourceType() {
-        return resourceType;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setLectureId(long lectureId) {
+    public Long getLectureId() {
+        return lectureId;
+    }
+
+    public void setLectureId(Long lectureId) {
         this.lectureId = lectureId;
+    }
+
+    public ResurceType getResourceType() {
+        return resourceType;
     }
 
     public void setResourceType(String resourceType) {
@@ -54,22 +53,22 @@ public class AdditionalMaterial {
         }
     }
 
-    public void setLectureById(long lectureId) {
+    public void setLectureById(Long lectureId) {
         CourseRepository courseRepository = CourseRepository.getInstance();
-        Course lecture = (Course) courseRepository.getByID((int)lectureId);
+        Course lecture = (Course) courseRepository.getByID((int) lectureId.longValue());
         if (lecture == null) {
             throw new IllegalArgumentException("Lecture with id " + lectureId + " does not exist");
         }
-        this.lectureId = lecture.getLectureID();
+        this.lectureId = (long) lecture.getLectureID();
     }
-
 
     @Override
     public String toString() {
-        return "AdditionalMaterial " +
+        return "AdditionalMaterial{" +
                 "id=" + id +
-                ", name='" + name +
+                ", name='" + name + '\'' +
                 ", lectureId=" + lectureId +
-                ", resourceType='" + resourceType;
+                ", resourceType=" + resourceType +
+                '}';
     }
 }

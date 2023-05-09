@@ -42,6 +42,7 @@ public class Main {
         int a = 0, b = 0, c = 0;
 
         while (a != -1) {
+
             System.out.println("__________________________________");
             System.out.print("Enter a number (-1 to exit): ");
             System.out.println();
@@ -179,6 +180,15 @@ public class Main {
                     for (Person lecturer : persons) {
                         if (lecturer.getRole() == Role.TEACHER) {
                             System.out.println(lecturer);
+                        }
+
+                    }
+                    for (Person lecturer : persons) {
+                        if (lecturer.getRole() == Role.TEACHER) {
+                            if (lecturer.getLastname().charAt(0) < 'N') {
+                                System.out.println("Teacher with char before N: ");
+                                System.out.println(lecturer);
+                            }
                         }
                     }
                     break;

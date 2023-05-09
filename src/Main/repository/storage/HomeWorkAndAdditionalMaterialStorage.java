@@ -23,15 +23,7 @@ public class HomeWorkAndAdditionalMaterialStorage {
         homeworkMap.put(lectureId, homeworkList);
     }
 
-    public void addAdditionalMaterial(AdditionalMaterial additionalMaterial) {
-        int lectureId = (int) additionalMaterial.getLectureId();
 
-        List<AdditionalMaterial> additionalMaterialList = additionalMaterialMap.getOrDefault(lectureId, new ArrayList<>());
-
-        additionalMaterialList.add(additionalMaterial);
-
-        additionalMaterialMap.put(lectureId, additionalMaterialList);
-    }
 
     public List<HomeWork> getHomeworkList() {
         List<HomeWork> homeWorks = new ArrayList<>();
