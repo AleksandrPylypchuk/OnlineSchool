@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AdditionalMaterialRepository {
     private Map<Integer, AdditionalMaterial> additionalMaterials = new HashMap<>();
@@ -57,5 +58,16 @@ public class AdditionalMaterialRepository {
         List<AdditionalMaterial> sortedList = new ArrayList<>(additionalMaterials.values());
         Collections.sort(sortedList, Comparator.comparing(AdditionalMaterial::getResourceType));
         return sortedList;
+    }
+    public void printAdditionalMaterialsGroupedByCourse() {
+        Map<Long, List<AdditionalMaterial>> materialsByCourse = getAllAdditionalMaterials().stream()
+                .collect(Collectors.groupingBy(AdditionalMaterial::getLectureId));
+
+        for (Long courseId : materialsByCourse.keySet()) {
+            System.out.println("Course ID: " + courseId);
+            for (AdditionalMaterial material : materialsByCourse.get(courseId)) {
+                System.out.println(material.toString());
+            }
+        }
     }
 }

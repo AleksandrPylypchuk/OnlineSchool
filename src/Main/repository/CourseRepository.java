@@ -2,9 +2,12 @@ package Main.repository;
 
 import Main.object.Course;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-
+import java.util.List;
+import java.util.Date;
 import static service.CoursesService.Counting;
 import static service.CoursesService.ID;
 
@@ -14,6 +17,7 @@ public class CourseRepository implements CourseRepositoryInterface{
     private int CAPACITY = 1;
     private Course[] courseArrays = new Course[CAPACITY];
 
+    private List<Course> courses = new ArrayList();
 
     public void addCourse(Course course) {
 
@@ -81,6 +85,32 @@ public class CourseRepository implements CourseRepositoryInterface{
         Course[] courses = getCourseArrays();
         Arrays.sort(courses, Comparator.nullsLast(Comparator.comparing(Course::getName)));
         return courses;
+    }
+    public void printCoursesStartingFromDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, EEEE HH:mm:ss");
+        for (Course course : courses) {
+            if (course.getCourseDate() != null && course.getCourseDate().compareTo(date) >= 0) {
+                System.out.println(course.getName() + ": " + dateFormat.format(course.getCourseDate()));
+            }
+        }
+    }
+    public void printCoursesEndingBeforeDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, EEEE HH:mm:ss");
+        for (Course course : courses) {
+            if (course.getCourseDate() != null && course.getCourseDate().compareTo(date) <= 0) {
+                System.out.println(course.getName() + ": " + dateFormat.format(course.getCourseDate()));
+            }
+        }
+    }
+    public void printCoursesBetweenDates(Date startDate, Date endDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, EEEE HH:mm:ss");
+        for (Course course : courses) {
+            if (course.getCourseDate() != null &&
+                    course.getCourseDate().compareTo(startDate) >= 0 &&
+                    course.getCourseDate().compareTo(endDate) <= 0) {
+                System.out.println(course.getName() + ": " + dateFormat.format(course.getCourseDate()));
+            }
+        }
     }
 
 }
